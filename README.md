@@ -1,2 +1,0 @@
-# tneed
-for shop
