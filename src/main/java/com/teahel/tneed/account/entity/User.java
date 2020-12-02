@@ -11,7 +11,7 @@ import javax.persistence.Entity;
  */
 
 @Data
-@Entity
+//@Entity
 public class User {
     private String userName;
 
