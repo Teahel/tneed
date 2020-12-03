@@ -2,7 +2,9 @@ package com.teahel.tneed.account.entity;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.util.List;
+
 
 /**
  * @version 1.0
@@ -11,16 +13,24 @@ import javax.persistence.Entity;
  */
 
 @Data
-//@Entity
+@Entity
 public class User {
-    private String userName;
+    @Id
+    @GeneratedValue
+    private Long id;
+    private String username;
+    private String password;
+    @OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    private List<Role> roles;
 
-    private String passWord;
-
-    public User(String userName,String passWord){
-        this.passWord = passWord;
-        this.userName = userName;
-        throw new RuntimeException("");
+    public User() {
     }
+
+    public User(String username, String password, List<Role> roles) {
+        this.username = username;
+        this.password = password;
+        this.roles = roles;
+    }
+
 
 }
