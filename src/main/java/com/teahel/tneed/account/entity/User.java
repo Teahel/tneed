@@ -1,6 +1,7 @@
 package com.teahel.tneed.account.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @Data
 @Entity
+@NoArgsConstructor
 public class User {
     @Id
     @GeneratedValue
@@ -23,8 +25,6 @@ public class User {
     @OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     private List<Role> roles;
 
-    public User() {
-    }
 
     public User(String username, String password, List<Role> roles) {
         this.username = username;

@@ -16,17 +16,13 @@
 
 package com.teahel.tneed.web;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 /**
  * @author Joe Grandja
  */
-@Controller
+//@Controller
 public class MainController {
 
-	@RequestMapping("/")
+/*	@RequestMapping("/")
 	public String root() {
 		return "redirect:/index";
 	}
@@ -43,6 +39,7 @@ public class MainController {
 
 	@RequestMapping("/login")
 	public String login() {
+		System.out.println("******************");
 		return "login";
 	}
 
@@ -50,6 +47,6 @@ public class MainController {
 	public String loginError(Model model) {
 		model.addAttribute("loginError", true);
 		return "login";
-	}
+	}*/
 
 }
