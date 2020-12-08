@@ -4,8 +4,21 @@
         <title>Login page</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="/css/main.css" th:href="@{/css/main.css}" />
+        <!-- 引入样式 -->
+        <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+        <!-- 引入组件库 -->
+        <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+        <!-- vue -->
+<!--
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+-->
 	</head>
     <body>
+      <el-row>
+        <el-button>默认按钮</el-button>
+        <el-button type="primary">主要按钮</el-button>
+
+      </el-row>
         <h1>Login page</h1>
         <p>Example user: user / password</p>
         <p th:if="${loginError}" class="error">Wrong user or password</p>
@@ -17,5 +30,6 @@
             <input type="submit" value="Log in" />
         </form>
         <p><a href="/index" th:href="@{/index}">Back to home page</a></p>
+
     </body>
 </html>
