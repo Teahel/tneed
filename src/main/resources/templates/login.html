@@ -3,25 +3,12 @@
     <head>
         <title>Login page</title>
         <meta charset="utf-8" />
-        <link rel="stylesheet" href="/css/main.css" th:href="@{/css/main.css}" />
-        <!-- 引入样式 -->
-        <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-        <!-- 引入组件库 -->
-        <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-        <!-- vue -->
-<!--
-        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
--->
+        <link rel="stylesheet" href="/css/index.css" th:href="@{/css/index.css}" />
+
 	</head>
     <body>
-      <el-row>
-        <el-button>默认按钮</el-button>
-        <el-button type="primary">主要按钮</el-button>
-
-      </el-row>
-        <h1>Login page</h1>
-        <p>Example user: user / password</p>
-        <p th:if="${loginError}" class="error">Wrong user or password</p>
+      <!--
+       <p th:if="${loginError}" class="error">Wrong user or password</p>
         <form th:action="@{/login}" method="post">
             <label for="username">Username</label>:
             <input type="text" id="username" name="username" autofocus="autofocus" /> <br />
@@ -30,6 +17,38 @@
             <input type="submit" value="Log in" />
         </form>
         <p><a href="/index" th:href="@{/index}">Back to home page</a></p>
+        -->
 
+      <div id="app">
+          <el-row>
+              <el-button>默认按钮</el-button>
+              <el-button type="primary">主要按钮</el-button>
+              <el-button type="success">成功按钮</el-button>
+              <el-button type="info">信息按钮</el-button>
+              <el-button type="warning">警告按钮</el-button>
+              <el-button type="danger">危险按钮</el-button>
+          </el-row>
+      </div>
     </body>
+
+    <!-- import Vue before Element -->
+<!--
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+-->
+    <!-- import JavaScript -->
+<!--
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+-->
+
+    <script type="text/javascript"   th:src="@{/js/index.js}"></script>
+    <script type="text/javascript"   th:src="@{/js/vue.js}"></script>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: function() {
+                return { visible: false }
+            }
+        })
+    </script>
 </html>
