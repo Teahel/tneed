@@ -1,13 +1,67 @@
-body {
-    font-family: sans;
-    font-size: 1em;
+.el-header, .el-footer {
+    background-color: #FFFFFF;
+    color: #333;
+    text-align: center;
+    line-height: 60px;
+}
+.el-main {
+    background-color: #FFFFFF;
+    color: #333;
+    text-align: center;
+    line-height: 160px;
 }
 
-p.error {
-    font-weight: bold;
-    color: red;
+body > .el-container {
+    margin-bottom: 100px;
 }
 
-div.logout {
-    float: right;
+#app {
+    font-family: Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    left: 50%;
 }
+
+.login .el-card {
+    width: 340px;
+    display: flex;
+    justify-content: center;
+}
+
+.login .el-card {
+    padding-top: 0;
+    padding-bottom: 30px;
+
+}
+
+.login-button {
+    width: 100%;
+    margin-top: 40px;
+}
+.login-form {
+    width: 290px;
+}
+
+.el-input input {
+    padding-left: 35px;
+}
+
+
+a {
+    color: #F56C6C;
+    text-decoration: none;
+}
+h2 {
+    font-family: "Open Sans";
+    letter-spacing: 1px;
+    font-family: Roboto, sans-serif;
+    padding-bottom: 20px;
+    color: #3a8ee6;
+}
+
