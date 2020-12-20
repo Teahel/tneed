@@ -23,6 +23,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 /**
  * @author Joe Grandja
@@ -35,13 +36,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 				.authorizeRequests((authorize) -> authorize
-					.antMatchers("/css/**","/js/**", "/index").permitAll()
+					.antMatchers("/css/**","/js/**", "/index","/csrf").permitAll()
 					.antMatchers("/user/**").hasRole("USER")
 				)
 				.formLogin((formLogin) -> formLogin
 					.loginPage("/login")
 					.failureUrl("/login-error")
-				);
+				).csrf().csrfTokenRepository(new HttpSessionCsrfTokenRepository());
 	}
 	// @formatter:on
 

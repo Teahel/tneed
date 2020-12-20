@@ -1,5 +1,6 @@
 package com.teahel.tneed;
 
+import com.teahel.tneed.account.controller.UserController;
 import com.teahel.tneed.account.dao.UserRepository;
 import com.teahel.tneed.account.entity.Role;
 import com.teahel.tneed.account.entity.User;
@@ -15,6 +16,10 @@ public class TestUser extends TneedApplicationTests{
     @Autowired
     private UserRepository repository;
 
+    @Autowired
+    private UserController userController;
+
+
     @Test
     public void saveUser(){
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
@@ -25,6 +30,6 @@ public class TestUser extends TneedApplicationTests{
         /*{bcrypt}$2a$10$RleCDGdJBvfQpyPRah8pGOz8d96Qy2LhjhLJ63aJXmKQiMcteNDJS*/
         System.out.println(encoder.encode("123456"));
 
-
     }
+
 }

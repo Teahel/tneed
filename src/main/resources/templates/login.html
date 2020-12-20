@@ -3,39 +3,41 @@
     <head>
         <title>Login page</title>
         <meta charset="utf-8" />
+        <meta name="_csrf" th:content="${_csrf.token}"/>
+        <!-- default header name is X-CSRF-TOKEN -->
+        <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
         <link rel="stylesheet" href="/css/index.css" th:href="@{/css/index.css}" />
         <link rel="stylesheet" href="/css/main.css" th:href="@{/css/main.css}" />
 
+        <script type="text/javascript"   th:src="@{/js/jquery-1.7.2.js}"></script>
+
 	</head>
     <body>
-
-     <!--
-       <p th:if="${loginError}" class="error">Wrong user or password</p>
+     <!--  <p th:if="${loginError}" class="error">Wrong user or password</p>
         <form th:action="@{/login}" method="post">
             <label for="username">Username</label>:
             <input type="text" id="username" name="username" autofocus="autofocus" /> <br />
             <label for="password">Password</label>:
             <input type="password" id="password" name="password" /> <br />
-            <input type="submit" value="Log in" />
+            <input type="submit" value="Login" />
         </form>
         <p><a href="/index" th:href="@{/index}">Back to home page</a></p>
-        -->
-
-      <div id="app">
+    </body>-->
+     <div id="app">
           <el-container>
               <el-header height="100px"></el-header>
               <el-main >
                   <div th:align="center" th:class="login">
                       <el-card >
                           <h2>Login</h2>
-                          <form th:action="@{/login}" method="post">
-                          <el-form   class="login-form"  :model="model"   :rules="rules"  ref="form"  @submit.native.prevent="login" >
+                          <el-form   class="login-form" ref="form"  @submit.native.prevent="login" >
+
                               <el-form-item prop="username">
-                                  <el-input v-model="model.username" placeholder="Username" prefix-icon="fas fa-user"></el-input>
+                                  <el-input v-model="username" placeholder="Username" prefix-icon="fas fa-user" autofocus="autofocus" ></el-input>
                               </el-form-item>
                               <el-form-item prop="password">
                                   <el-input
-                                          v-model="model.password"
+                                          v-model="password"
                                           placeholder="Password"
                                           type="password"
                                           prefix-icon="fas fa-lock"
@@ -51,10 +53,11 @@
                                   >Login</el-button>
                               </el-form-item>
                               <el-form-item>
+                                  <p th:if="${loginError}" class="error">Wrong user or password</p>
                                   <a class="forgot-password" href="https://oxfordinformatics.com/">Forgot password ?</a>
                               </el-form-item>
                           </el-form>
-                          </form>
+
                       </el-card>
                   </div>
               </el-main>
@@ -64,23 +67,12 @@
 
       </div>
     </body>
-
     <script type="text/javascript"   th:src="@{/js/vue.js}"></script>
+    <script type="text/javascript"   th:src="@{/js/vue-resource.js}"></script>
+    <script type="text/javascript"   th:src="@{/js/axios.min.js}"></script>
 
+    <!-- elementUI js-->
     <script type="text/javascript"   th:src="@{/js/index.js}"></script>
+    <script type="text/javascript"   th:src="@{/js/login.js}"></script>
 
-    <script>
-        new Vue({
-            el: '#app',
-            data: function() {
-                return {
-                    model: {
-                        username: "",
-                        password: ""
-                    },
-                    loading: false,
-                }
-            }
-        })
-    </script>
 </html>

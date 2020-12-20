@@ -2,6 +2,7 @@ package com.teahel.tneed.common;
 
 import com.teahel.tneed.account.entity.Role;
 import com.teahel.tneed.account.entity.User;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,6 +19,10 @@ public class CustomUserDetails implements UserDetails {
     private String username;
 
     public CustomUserDetails(User user) {
+        if(user==null){
+          throw new InternalAuthenticationServiceException("登录账户不存在！");
+        }
+
         this.username = user.getUsername();
         this.password = user.getPassword();
         this.authorities = translate(user.getRoles());
