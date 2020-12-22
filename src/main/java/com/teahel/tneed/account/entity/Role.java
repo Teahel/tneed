@@ -11,15 +11,24 @@ import javax.persistence.Id;
 @Entity
 @NoArgsConstructor
 public class Role{
+
+    /**
+     * 主键
+     */
     @Id
     @GeneratedValue
     private Long id;
 
+
+    /**
+     * 角色名称
+     */
+    String name;
+
+
     public Role(String name) {
         this.name = name;
     }
-
-    String name;
 
 
 }
