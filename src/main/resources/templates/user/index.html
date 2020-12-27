@@ -1,13 +1,97 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
     <head>
-        <title>Hello Spring Security</title>
+        <title>二静</title>
         <meta charset="utf-8" />
-        <link rel="stylesheet" href="/css/main.css" th:href="@{/css/main.css}" />
+        <link rel="stylesheet" href="/css/index.css" th:href="@{/css/index.css}" />
+        <link rel="stylesheet" href="/css/main.css" th:href="@{/css/user.css}" />
     </head>
     <body>
-        <div th:substituteby="index::logout"></div>
-        <h1>This is a secured page!</h1>
-        <p><a href="/index" th:href="@{/index}">Back to home page</a></p>
+
+        <div id="user">
+            <el-container>
+
+                <el-header>
+
+                    <el-row >
+                        <el-col :span="2" :offset="3">
+                            <el-link :underline="false" >二静网络支持</el-link>
+                        </el-col>
+                        <el-col :span="3" :offset="11">
+                            <el-link :underline="false">欢迎：<span sec:authentication="name"></span></el-link>
+                        </el-col>
+                        <el-col :span="1">
+                            <el-link :underline="false" href="/user/index" >主页</el-link>
+                        </el-col>
+                        <el-col :span="1">
+                            <el-link :underline="false"  href="/index"  >修改密码</el-link>
+                        </el-col>
+                    </el-row>
+
+                </el-header>
+
+                <el-main>
+                   <!-- <div th:substituteby="index::logout"></div>
+                   <p><a href="/index" th:href="@{/index}">Back to home page</a></p>
+                   -->
+
+                    <el-row :gutter="0" >
+                        <el-col :span="16" :offset="4">
+                        <div class="grid-content bg-purple">
+                            <p>1、测试阶段不限流量</p>
+                            <p>2、如果有问题请发送邮件到li.teahel@gmail.com;我看到之后会尽快回复。</p>
+                            <p>3、为了避免浪费时间，请把问题描述清楚。</p>
+                        </div>
+
+                       </el-col>
+
+                    </el-row>
+
+                    <el-row :gutter="20" >
+                        <el-col :span="16" :offset="4">
+                            <div class="user-content user-table-bg">
+                                <p>用户信息</p>
+                            </div>
+                            <el-table
+                                    :data="tableData"
+                                    style="width: 100%"
+                                   >
+                                <el-table-column
+                                        prop="username"
+                                        label="用户名"
+                                        width="180">
+                                </el-table-column>
+                                <el-table-column
+                                        prop="email"
+                                        label="邮箱"
+                                        width="180">
+                                </el-table-column>
+                                <el-table-column
+                                        prop="effectiveTime"
+                                        label="截至时间">
+                                </el-table-column>
+                            </el-table>
+
+                        </el-col>
+
+                    </el-row>
+
+
+                </el-main>
+
+                <el-footer>Footer</el-footer>
+            </el-container>
+
+        </div>
+
     </body>
+    <script type="text/javascript"   th:src="@{/js/jquery-1.7.2.js}"></script>
+
+    <script type="text/javascript"   th:src="@{/js/vue.js}"></script>
+    <script type="text/javascript"   th:src="@{/js/vue-resource.js}"></script>
+    <script type="text/javascript"   th:src="@{/js/axios.min.js}"></script>
+
+    <!-- elementUI js-->
+    <script type="text/javascript"   th:src="@{/js/index.js}"></script>
+    <script type="text/javascript"   th:src="@{/js/user.js}"></script>
 </html>

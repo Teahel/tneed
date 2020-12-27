@@ -53,10 +53,7 @@ public class ServerInfo {
      */
     private LocalDateTime create_time;
 
-    /**
-     * 有效时间  充值之后显示该时间，有效期内充值则增加）
-     */
-    private LocalDateTime effective_time;
+
 
 
 }

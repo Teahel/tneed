@@ -31,6 +31,11 @@ public class User {
     private String username;
 
     /**
+     * 邮箱
+     */
+    private String email;
+
+    /**
      * 密码
      */
     private String password;
@@ -56,12 +61,19 @@ public class User {
      */
     private Integer inviteCount = Integer.valueOf(5);
 
+    /**
+     * 有效时间  充值之后显示该时间，有效期内充值则增加）
+     */
+    private LocalDateTime effective_time;
 
-    public User(String username, String password, List<Role> roles,LocalDateTime createTime) {
+    public User(String username, String password, List<Role> roles,LocalDateTime createTime,LocalDateTime effective_time,String inviteCode,String email) {
         this.username = username;
         this.password = password;
         this.roles = roles;
         this.createTime = createTime;
+        this.effective_time =effective_time;
+        this.inviteCode = inviteCode;
+        this.email = email;
     }
 
 

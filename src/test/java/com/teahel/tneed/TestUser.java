@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.UUID;
 
 public class TestUser extends TneedApplicationTests{
 
@@ -27,7 +28,7 @@ public class TestUser extends TneedApplicationTests{
         //encoder.encode("SHA-1");
 
         repository.save(new User("zhangsan", encoder.encode("123456"),
-                Arrays.asList(new Role("USER"), new Role("ADMIN")),LocalDateTime.now()));
+                Arrays.asList(new Role("USER"), new Role("ADMIN")),LocalDateTime.now(),LocalDateTime.now(), UUID.randomUUID().toString(),"teahel@163.com"));
         /*{bcrypt}$2a$10$RleCDGdJBvfQpyPRah8pGOz8d96Qy2LhjhLJ63aJXmKQiMcteNDJS*/
         System.out.println(encoder.encode("123456"));
 

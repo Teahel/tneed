@@ -6,10 +6,13 @@
         <meta name="_csrf" th:content="${_csrf.token}"/>
         <!-- default header name is X-CSRF-TOKEN -->
         <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+        <!-- elementUI css文件-->
         <link rel="stylesheet" href="/css/index.css" th:href="@{/css/index.css}" />
+
+        <!-- 登录界面css -->
         <link rel="stylesheet" href="/css/main.css" th:href="@{/css/main.css}" />
 
-        <script type="text/javascript"   th:src="@{/js/jquery-1.7.2.js}"></script>
 
 	</head>
     <body>
@@ -67,6 +70,8 @@
 
       </div>
     </body>
+    <script type="text/javascript"   th:src="@{/js/jquery-1.7.2.js}"></script>
+
     <script type="text/javascript"   th:src="@{/js/vue.js}"></script>
     <script type="text/javascript"   th:src="@{/js/vue-resource.js}"></script>
     <script type="text/javascript"   th:src="@{/js/axios.min.js}"></script>

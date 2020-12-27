@@ -17,7 +17,7 @@ public class Announcement {
      */
     @Id
     @GeneratedValue
-    private Long server_id;
+    private Long id;
 
     /**
      * 公告信息
