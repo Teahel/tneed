@@ -10,11 +10,24 @@ new Vue({
         }
     },
     created:function(){
-        this.find();
+        this.findUser();
     },
     methods:{
-       find:function (){
-          console.log("dfdfdfdfdfdfd");
+       findUser:function (){
+           var token = $("meta[name='_csrf']").attr("content");
+           var authentication = $('#authentication');
+           if(authentication == undefined || authentication == ""){
+               return;
+           }
+           axios.post('/userinfo/select', {
+               '_csrf':token,
+               username:authentication[0].innerText,
+           }).then(function (response) {
+               console.log(response);
+           })
+               .catch(function (error) {
+                   console.log(error);
+               });
        }
     }
 })

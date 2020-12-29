@@ -21,6 +21,10 @@ public class UserImpl implements IUserService {
       */
     @Override
     public User saveUser(User user) {
+        User exitUser = findUser(user);
+        if(exitUser!=null){
+           throw new RuntimeException("不允许出现重复名称");
+        }
         /**
          * 对账户密码加密保存
          * 使用默认bcrypt加密方式
@@ -29,4 +33,17 @@ public class UserImpl implements IUserService {
         user.setPassword(encoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
+
+    /**
+     * 查询账户信息
+     *
+     * @param user 查询条件：用户名
+     * @return 查询结果
+     */
+    @Override
+    public User findUser(User user) {
+        return  userRepository.findByUsername(user.getUsername());
+    }
+
+
 }

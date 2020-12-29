@@ -10,4 +10,11 @@ public interface IUserService {
      * @return 保存结果
      */
     public User saveUser(User user);
+
+    /**
+     * 查询账户信息
+     * @param user 查询条件：用户名
+     * @return 查询结果
+     */
+    public User findUser(User user);
 }

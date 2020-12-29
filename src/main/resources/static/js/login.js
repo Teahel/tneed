@@ -42,9 +42,7 @@ new Vue({
             $.ajax({type:'POST',url:"/login",async:false,data:{'_csrf':token,username:this.username,password:this.password},
                 success:function(result){
                     window.location.href = "/user/index";
-
                 }});
-
         }
     }
 })

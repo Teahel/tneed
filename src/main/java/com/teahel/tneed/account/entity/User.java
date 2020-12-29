@@ -30,10 +30,6 @@ public class User {
      */
     private String username;
 
-    /**
-     * 邮箱
-     */
-    private String email;
 
     /**
      * 密码
@@ -66,14 +62,14 @@ public class User {
      */
     private LocalDateTime effective_time;
 
-    public User(String username, String password, List<Role> roles,LocalDateTime createTime,LocalDateTime effective_time,String inviteCode,String email) {
+    public User(String username, String password, List<Role> roles,LocalDateTime createTime,LocalDateTime effective_time,String inviteCode) {
         this.username = username;
         this.password = password;
         this.roles = roles;
         this.createTime = createTime;
         this.effective_time =effective_time;
         this.inviteCode = inviteCode;
-        this.email = email;
+
     }
 
 
