@@ -48,7 +48,7 @@ public class UserController {
      * @param user 查询条件：账户名称
      * @return 查询结果
      */
-    @RequestMapping("/userinfo/select")
+    @RequestMapping("/user/select")
     @ResponseBody
     public ResultUtils select(@RequestBody User user){
         User u = userService.findUser(user);

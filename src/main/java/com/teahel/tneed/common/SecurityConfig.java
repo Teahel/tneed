@@ -22,6 +22,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
@@ -37,13 +38,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 				.authorizeRequests((authorize) -> authorize
 					.antMatchers("/css/**","/js/**","/index").permitAll()
-				.antMatchers("/user/**").hasRole("USER")
+			        .antMatchers("/user/**").hasRole("USER")
 					.antMatchers("/manager/**").hasRole("ADMIN")
 				)
 				.formLogin((formLogin) -> formLogin
 					.loginPage("/login")
 					.failureUrl("/login-error")
 				).csrf().csrfTokenRepository(new HttpSessionCsrfTokenRepository());
+
+		http.sessionManagement()
+				.sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+				.maximumSessions(1)
+				.expiredUrl("/login");
+
 	}
 	// @formatter:on
 

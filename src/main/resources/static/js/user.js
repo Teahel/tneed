@@ -14,12 +14,18 @@ new Vue({
     },
     methods:{
        findUser:function (){
-           var token = $("meta[name='_csrf']").attr("content");
            var authentication = $('#authentication');
            if(authentication == undefined || authentication == ""){
                return;
            }
-           axios.post('/userinfo/select', {
+           $.ajax({type:'POST',url:"/user/select",
+               data:{username:authentication[0].innerText},
+                   contentType: "application/json",
+               success:function(result){
+                   console.log(result);
+               }});
+
+          /* axios.post('/userinfo/select', {
                '_csrf':token,
                username:authentication[0].innerText,
            }).then(function (response) {
@@ -27,7 +33,7 @@ new Vue({
            })
                .catch(function (error) {
                    console.log(error);
-               });
+               });*/
        }
     }
 })
