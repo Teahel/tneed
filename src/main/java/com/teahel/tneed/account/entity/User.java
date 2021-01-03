@@ -60,14 +60,14 @@ public class User {
     /**
      * 有效时间  充值之后显示该时间，有效期内充值则增加）
      */
-    private LocalDateTime effective_time;
+    private LocalDateTime effectiveTime;
 
-    public User(String username, String password, List<Role> roles,LocalDateTime createTime,LocalDateTime effective_time,String inviteCode) {
+    public User(String username, String password, List<Role> roles,LocalDateTime createTime,LocalDateTime effectiveTime,String inviteCode) {
         this.username = username;
         this.password = password;
         this.roles = roles;
         this.createTime = createTime;
-        this.effective_time =effective_time;
+        this.effectiveTime = effectiveTime;
         this.inviteCode = inviteCode;
 
     }

@@ -3,9 +3,9 @@ new Vue({
     data: function() {
         return {
             tableData: [{
-                username: '2016-05-02',
-                email: '王小虎',
-                effectiveTime: '上海市普陀区金沙江路 1518 弄'
+                username: '',
+                email: '',
+                effectiveTime: ''
             }]
         }
     },
@@ -18,22 +18,32 @@ new Vue({
            if(authentication == undefined || authentication == ""){
                return;
            }
-           $.ajax({type:'POST',url:"/user/select",
-               data:{username:authentication[0].innerText},
-                   contentType: "application/json",
-               success:function(result){
-                   console.log(result);
-               }});
-
-          /* axios.post('/userinfo/select', {
-               '_csrf':token,
+           var token = $("meta[name='_csrf']").attr("content");
+           var tableData = this.tableData;
+           let self = this;
+           axios.post('/user/select', {
                username:authentication[0].innerText,
+           },{headers: {
+                   'X-XSRF-TOKEN': token
+               }
            }).then(function (response) {
+               if(200 == response.status){
+                   if(response.data.code == 0){
+                       self.tableData[0].username = response.data.data.username;
+                       self.tableData[0].effectiveTime = response.data.data.effectiveTime;
+
+                       /*
+                                              response.data.data.username
+                       */
+                   }
+               }
                console.log(response);
+               console.log(tableData);
+
            })
                .catch(function (error) {
                    console.log(error);
-               });*/
+               });
        }
     }
 })

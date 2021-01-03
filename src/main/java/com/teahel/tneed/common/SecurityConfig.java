@@ -25,7 +25,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 /**
  * @author Joe Grandja
@@ -41,6 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.antMatchers("/css/**","/js/**","/index").permitAll()
 			        .antMatchers("/user/**").hasRole("USER")
 					.antMatchers("/manager/**").hasRole("ADMIN")
+
 				)
 				.formLogin((formLogin) -> formLogin
 					.loginPage("/login")
