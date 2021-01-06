@@ -61,7 +61,36 @@
                             <el-table
                                     :data="tableData"
                                     style="width: 100%"
+                                    border
                                    >
+                                <el-table-column
+                                        prop="username"
+                                        label="用户名"
+                                        width="180">
+                                </el-table-column>
+                                <el-table-column
+                                        prop="email"
+                                        label="邮箱"
+                                        width="180">
+                                </el-table-column>
+                                <el-table-column
+                                        prop="effectiveTime"
+                                        label="截至时间">
+                                </el-table-column>
+                            </el-table>
+
+                        </el-col>
+
+
+                        <el-col :span="16" :offset="4">
+                            <div class="user-content server-table-bg">
+                                <p>服务</p>
+                            </div>
+                            <el-table
+                                    :data="tableData"
+                                    style="width: 100%"
+                                    border
+                            >
                                 <el-table-column
                                         prop="username"
                                         label="用户名"

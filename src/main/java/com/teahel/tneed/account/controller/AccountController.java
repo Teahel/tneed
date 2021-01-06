@@ -33,5 +33,10 @@ public class AccountController {
         return ResultUtils.ok(u);
     }
 
+    /*@PostMapping("/update")
+    public ResultUtils update(@RequestBody User user){
+
+    }*/
+
 
 }

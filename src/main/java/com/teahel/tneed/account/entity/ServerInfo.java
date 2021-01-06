@@ -21,7 +21,7 @@ public class ServerInfo {
      */
     @Id
     @GeneratedValue
-    private Long server_id;
+    private Long serverId;
 
     /**
      * 服务地址
@@ -31,7 +31,7 @@ public class ServerInfo {
     /**
      * 端口
      */
-    private String server_port;
+    private String serverPort;
 
     /**
      * 密码
@@ -51,9 +51,7 @@ public class ServerInfo {
     /**
      * 创建时间
      */
-    private LocalDateTime create_time;
-
-
+    private LocalDateTime createTime;
 
 
 }

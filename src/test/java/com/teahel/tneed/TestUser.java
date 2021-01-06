@@ -4,6 +4,7 @@ import com.teahel.tneed.account.controller.UserController;
 import com.teahel.tneed.account.dao.UserRepository;
 import com.teahel.tneed.account.entity.Role;
 import com.teahel.tneed.account.entity.User;
+import com.teahel.tneed.account.service.IUserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -21,6 +22,9 @@ public class TestUser extends TneedApplicationTests{
     @Autowired
     private UserController userController;
 
+    @Autowired
+    private IUserService userService;
+
 
     @Test
     public void saveUser(){
@@ -32,6 +36,11 @@ public class TestUser extends TneedApplicationTests{
         /*{bcrypt}$2a$10$RleCDGdJBvfQpyPRah8pGOz8d96Qy2LhjhLJ63aJXmKQiMcteNDJS*/
         System.out.println(encoder.encode("123456"));
 
+    }
+
+    @Test
+    public void updateUser(){
+        userService.updateUser("12","zhangsan");
     }
 
 }

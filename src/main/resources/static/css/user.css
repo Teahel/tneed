@@ -17,7 +17,8 @@
     background-color: #FFFFFF;
     color: #333;
     text-align: center;
-    line-height: 36px;
+    line-height: 30px;
+    height: 800px;
 }
 
 body > .el-container {
@@ -63,4 +64,11 @@ body > .el-container {
     text-align: left;
     min-height: 20px;
     background-color: #F56C6C;
+}
+
+.server-table-bg{
+    border-radius: 4px;
+    text-align: left;
+    min-height: 20px;
+    background-color: #E6A23C;
 }

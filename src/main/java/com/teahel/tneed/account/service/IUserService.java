@@ -17,4 +17,12 @@ public interface IUserService {
      * @return 查询结果
      */
     public User findUser(User user);
+
+    /**
+     * 修改账户密码
+     * @param password 密码
+     * @param username 用户名
+     */
+    public void updateUser(String password,String username);
+
 }

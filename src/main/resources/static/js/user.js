@@ -31,19 +31,12 @@ new Vue({
                    if(response.data.code == 0){
                        self.tableData[0].username = response.data.data.username;
                        self.tableData[0].effectiveTime = response.data.data.effectiveTime;
-
-                       /*
-                                              response.data.data.username
-                       */
                    }
                }
-               console.log(response);
-               console.log(tableData);
 
-           })
-               .catch(function (error) {
-                   console.log(error);
-               });
+           }).catch(function (error) {
+               console.log(error);
+           });
        }
     }
 })

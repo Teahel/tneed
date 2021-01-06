@@ -40,14 +40,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					.antMatchers("/css/**","/js/**","/index").permitAll()
 			        .antMatchers("/user/**").hasRole("USER")
 					.antMatchers("/manager/**").hasRole("ADMIN")
-
 				)
 				.formLogin((formLogin) -> formLogin
 					.loginPage("/login")
 					.failureUrl("/login-error")
 				).csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
 
-		http.sessionManagement()
+		http
+				.sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
 				.maximumSessions(1)
 				.expiredUrl("/login");

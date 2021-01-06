@@ -45,5 +45,17 @@ public class UserImpl implements IUserService {
         return  userRepository.findByUsername(user.getUsername());
     }
 
+    /**
+     * 修改账户密码
+     * @param password 密码
+     * @param username 用户名
+     */
+    @Override
+    public void updateUser(String password,String username) {
+        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        String newPassword = encoder.encode(password);
+        userRepository.updateUser(newPassword,username);
+    }
+
 
 }
