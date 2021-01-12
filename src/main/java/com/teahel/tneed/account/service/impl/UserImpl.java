@@ -22,7 +22,7 @@ public class UserImpl implements IUserService {
     @Override
     public User saveUser(User user) {
         User exitUser = findUser(user);
-        if(exitUser!=null){
+        if( exitUser != null){
            throw new RuntimeException("不允许出现重复名称");
         }
         /**

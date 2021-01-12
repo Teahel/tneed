@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class UserController {
 
 
-
     @RequestMapping("/")
     public String root() {
         return "redirect:/index";
@@ -35,8 +34,6 @@ public class UserController {
         model.addAttribute("loginError", true);
         return "login";
     }
-
-
 
 
 
