@@ -3,12 +3,14 @@ package com.teahel.tneed.account.service.impl;
 import com.teahel.tneed.account.dao.UserRepository;
 import com.teahel.tneed.account.entity.User;
 import com.teahel.tneed.account.service.IUserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class UserImpl implements IUserService {
 
     @Autowired
