@@ -30,7 +30,8 @@
                             <el-link :underline="false" href="/user/index" >主页</el-link>
                         </el-col>
                         <el-col :span="1">
-                            <el-link :underline="false"  href="/index"  >修改密码</el-link>
+                            <el-button type="text" @click="dialogUserVisible = true">修改账户信息</el-button>
+                       <!--     <el-link :underline="false"  href="/index"  >修改密码</el-link>-->
                         </el-col>
                     </el-row>
 
@@ -40,6 +41,38 @@
                    <!-- <div th:substituteby="index::logout"></div>
                    <p><a href="/index" th:href="@{/index}">Back to home page</a></p>
                    -->
+
+                    <!-- 修改密码 -->
+                    <el-dialog
+                            title="提示"
+                            :visible.sync="dialogUserVisible"
+                            width="30%"
+                            :before-close="handleClose"
+                            clearable
+                    >
+
+                        <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+
+                            <el-form-item label="密码" prop="pass">
+                                <el-input type="oldpassword" v-model="ruleForm.pass" autocomplete="off"></el-input>
+                            </el-form-item>
+
+                            <el-form-item label="密码" prop="pass">
+                                <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
+                            </el-form-item>
+                            <el-form-item label="确认密码" prop="checkPass">
+                                <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
+                            </el-form-item>
+
+                            <el-form-item>
+                                <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+                                <el-button @click="resetForm('ruleForm')">重置</el-button>
+                            </el-form-item>
+                        </el-form>
+
+
+                    </el-dialog>
+
 
                     <el-row :gutter="0" >
                         <el-col :span="16" :offset="4">
@@ -119,7 +152,10 @@
 
         </div>
 
+
     </body>
+
+
 
     <script type="text/javascript"   th:src="@{/js/vue.js}"></script>
     <script type="text/javascript"   th:src="@{/js/vue-resource.js}"></script>
