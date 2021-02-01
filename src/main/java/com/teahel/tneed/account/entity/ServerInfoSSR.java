@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @NoArgsConstructor
-public class ServerInfo {
+public class ServerInfoSSR {
 
     /**
      * 主键
