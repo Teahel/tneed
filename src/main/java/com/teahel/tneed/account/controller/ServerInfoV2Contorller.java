@@ -6,10 +6,7 @@ import com.teahel.tneed.account.service.ServerInfoV2Service;
 import com.teahel.tneed.common.ResultUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,7 +29,7 @@ public class ServerInfoV2Contorller {
      * @return 查询结果
      */
     @PostMapping("/select")
-    public ResultUtils findServerInfoV2(ServerInfoV2DO serverInfoV2DO){
+    public ResultUtils findServerInfoV2(@RequestBody ServerInfoV2DO serverInfoV2DO){
         if(serverInfoV2DO.getUserid() == null){
             return  ResultUtils.error("查询账户为空");
         }
@@ -46,8 +43,10 @@ public class ServerInfoV2Contorller {
      * @return 执行结果
      */
     @PostMapping("/save")
-    public ResultUtils save(ServerInfoV2DO serverInfoV2DO){
-
+    public ResultUtils save(@RequestBody ServerInfoV2DO serverInfoV2DO){
+        serverInfoV2Service.addServerInfoV2DO(serverInfoV2DO);
+        return ResultUtils.ok();
     }
+
 
 }
