@@ -50,7 +50,7 @@ public class ServerInfoV2DO {
      * 0 开启
      * 1 未开启
      */
-    private Integer serverStatus;
+    private Integer serverStatus = Integer.valueOf(1);
 
     /**
      * 服务链接

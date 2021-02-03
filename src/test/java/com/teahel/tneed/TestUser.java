@@ -1,10 +1,13 @@
 package com.teahel.tneed;
 
 import com.teahel.tneed.account.controller.UserController;
+import com.teahel.tneed.account.dao.ServerInfoV2Repository;
 import com.teahel.tneed.account.dao.UserRepository;
 import com.teahel.tneed.account.entity.Role;
+import com.teahel.tneed.account.entity.ServerInfoV2DO;
 import com.teahel.tneed.account.entity.User;
 import com.teahel.tneed.account.service.IUserService;
+import com.teahel.tneed.account.service.ServerInfoV2Service;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -25,6 +28,8 @@ public class TestUser extends TneedApplicationTests{
     @Autowired
     private IUserService userService;
 
+    @Autowired
+    private ServerInfoV2Service serverInfoV2Service;
 
     @Test
     public void saveUser(){
@@ -41,6 +46,26 @@ public class TestUser extends TneedApplicationTests{
     @Test
     public void updateUser(){
         userService.updateUser("12","zhangsan");
+    }
+
+    /**
+     * 保存服务信息
+     */
+    @Test
+    public void addServerInfoV2(){
+
+        ServerInfoV2DO serverInfoV2DO = new ServerInfoV2DO();
+        serverInfoV2DO.setLocation("新加坡");
+        serverInfoV2DO.setServerLink(
+                "vmess://ewogICJ2IjogIjIiLAogICJwcyI6ICJ0ZXN0IiwKICAiYWRkIjogInRlYWhlbC5jbHViIiwKICAicG9ydCI6IDQ4OTE1LAogICJpZCI6IC" +
+                        "IwODFiMzZhNi1mZTVkLTRmZTMtOTc1My05OWU1YmEzMzdmMTciLAogICJhaWQiOiA2NCwKICAibmV0IjogInRjcCIsCiAgInR5cGUiOiAibm9uZSI" +
+                        "sCiAgImhvc3QiOiAiIiwKICAicGF0aCI6ICIiLAogICJ0bHMiOiAibm9uZSIKfQ==");
+        serverInfoV2DO.setModifiedTime(LocalDateTime.now());
+        serverInfoV2DO.setUserid(Long.valueOf(1));
+
+        serverInfoV2Service.addServerInfoV2DO(serverInfoV2DO);
+
+
     }
 
 }

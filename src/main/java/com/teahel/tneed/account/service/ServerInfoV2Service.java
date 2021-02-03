@@ -16,7 +16,7 @@ public interface ServerInfoV2Service {
      * 查询服务信息
      * @return 服务信息
      */
-    public List<ServerInfoV2DO> findByUserid(Integer userid);
+    public List<ServerInfoV2DO> findAll();
 
     /**
      * 新增服务信息

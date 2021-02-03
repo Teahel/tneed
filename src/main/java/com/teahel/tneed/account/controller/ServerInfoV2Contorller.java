@@ -24,16 +24,12 @@ public class ServerInfoV2Contorller {
     public ServerInfoV2Service serverInfoV2Service;
 
     /**
-     * 若用户id为空查询全部设备信息
-     *
+     *获取全部设备信息
      * @return 查询结果
      */
     @PostMapping("/select")
-    public ResultUtils findServerInfoV2(@RequestBody ServerInfoV2DO serverInfoV2DO){
-        if(serverInfoV2DO.getUserid() == null){
-            return  ResultUtils.error("查询账户为空");
-        }
-        List<ServerInfoV2DO> list = serverInfoV2Service.findByUserid(serverInfoV2DO.getUserid().intValue());
+    public ResultUtils findServerInfoV2(){
+        List<ServerInfoV2DO> list = serverInfoV2Service.findAll();
         return ResultUtils.ok(list);
     }
 

@@ -31,26 +31,29 @@ public interface ServerInfoV2Repository extends JpaRepository<ServerInfoV2DO, Lo
      */
     @Modifying(clearAutomatically=true)
     @Transactional
-    @Query("update server_infov2do  s set s.server_status = ?1 where s.id = ?2")
+    @Query("update ServerInfoV2DO  s set s.serverStatus = ?1 where s.id = ?2")
     void modifyServerStatus(Integer serverStatus,Long id);
 
     /**
      * 查询全部
      * @return 所有列表
      */
-    public List<ServerInfoV2DO> findAllOrOrderByModifiedTimeDesc();
+     List<ServerInfoV2DO> findAll();
 
     /**
      * 根据用户userid
      * @return 查询服务信息结果
      */
-    public List<ServerInfoV2DO> findByUseridOrderByModifiedTimeDesc();
+
+     /*
+     List<ServerInfoV2DO> findByUserid();
+    */
 
 
     /**
      * 根据删除
      * @param id
      */
-    public void deleteById(Long id);
+     void deleteById(Long id);
 
 }

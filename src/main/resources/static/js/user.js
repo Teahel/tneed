@@ -53,6 +53,10 @@ new Vue({
            var token = $("meta[name='_csrf']").attr("content");
            var tableData = this.tableData;
            let self = this;
+
+           /**
+            * 查询用户信息
+            */
            axios.post('/user/select', {
                username:authentication[0].innerText,
            },{headers: {
@@ -69,6 +73,26 @@ new Vue({
            }).catch(function (error) {
                console.log(error);
            });
+
+           /**
+            * 查询服务信息
+            */
+           axios.post('/server/v2/select', {
+              // username:authentication[0].innerText,
+           },{headers: {
+                   'X-XSRF-TOKEN': token
+               }
+           }).then(function (response) {
+               if(200 == response.status){
+                   console.log(response);
+               }
+
+           }).catch(function (error) {
+               console.log(error);
+           });
+
+
+
        },
        updateUser:function () {
 

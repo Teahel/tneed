@@ -23,16 +23,11 @@ public class ServerInfoV2ServiceImpl implements ServerInfoV2Service {
 
     /**
      * 查询服务信息
-     *
-     * @param userid 账户
      * @return 服务信息
      */
     @Override
-    public List<ServerInfoV2DO> findByUserid(Integer userid) {
-        if(userid != null ){
-            return  repository.findByUseridOrderByModifiedTimeDesc();
-        }
-        return repository.findAllOrOrderByModifiedTimeDesc();
+    public List<ServerInfoV2DO> findAll() {
+        return repository.findAll();
     }
 
     /**
