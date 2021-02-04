@@ -2,6 +2,7 @@ package com.teahel.tneed.account.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -66,6 +67,7 @@ public class ServerInfoV2DO {
      * 变动时间
      */
     private LocalDateTime modifiedTime;
+
 
     /*
     主键 id

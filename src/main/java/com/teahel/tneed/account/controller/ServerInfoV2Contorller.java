@@ -1,6 +1,7 @@
 package com.teahel.tneed.account.controller;
 
 import com.teahel.tneed.account.entity.ServerInfoV2DO;
+import com.teahel.tneed.account.entity.ServerInfoV2DTO;
 import com.teahel.tneed.account.entity.User;
 import com.teahel.tneed.account.service.ServerInfoV2Service;
 import com.teahel.tneed.common.ResultUtils;
@@ -35,14 +36,16 @@ public class ServerInfoV2Contorller {
 
     /**
      * 新增服务信息
-     * @param serverInfoV2DO 服务信息
+     * @param ServerInfoV2DTO 服务信息
      * @return 执行结果
      */
     @PostMapping("/save")
-    public ResultUtils save(@RequestBody ServerInfoV2DO serverInfoV2DO){
-        serverInfoV2Service.addServerInfoV2DO(serverInfoV2DO);
+    public ResultUtils save(@RequestBody ServerInfoV2DTO ServerInfoV2DTO){
+        serverInfoV2Service.addServerInfoV2DO(ServerInfoV2DTO);
         return ResultUtils.ok();
     }
+
+
 
 
 }

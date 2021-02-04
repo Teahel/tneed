@@ -8,6 +8,7 @@ import com.teahel.tneed.account.entity.ServerInfoV2DO;
 import com.teahel.tneed.account.entity.User;
 import com.teahel.tneed.account.service.IUserService;
 import com.teahel.tneed.account.service.ServerInfoV2Service;
+import com.teahel.tneed.common.PropertyConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -30,6 +31,9 @@ public class TestUser extends TneedApplicationTests{
 
     @Autowired
     private ServerInfoV2Service serverInfoV2Service;
+
+    @Autowired
+    PropertyConfig propertyConfig;
 
     @Test
     public void saveUser(){
@@ -63,8 +67,14 @@ public class TestUser extends TneedApplicationTests{
         serverInfoV2DO.setModifiedTime(LocalDateTime.now());
         serverInfoV2DO.setUserid(Long.valueOf(1));
 
-        serverInfoV2Service.addServerInfoV2DO(serverInfoV2DO);
+     //   serverInfoV2Service.addServerInfoV2DO(serverInfoV2DO);
 
+
+    }
+
+    @Test
+    public void address(){
+        System.out.println(propertyConfig.getImageAddress());
 
     }
 

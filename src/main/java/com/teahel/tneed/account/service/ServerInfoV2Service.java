@@ -1,6 +1,7 @@
 package com.teahel.tneed.account.service;
 
 import com.teahel.tneed.account.entity.ServerInfoV2DO;
+import com.teahel.tneed.account.entity.ServerInfoV2DTO;
 
 import java.util.List;
 
@@ -20,9 +21,9 @@ public interface ServerInfoV2Service {
 
     /**
      * 新增服务信息
-     * @param serverInfoV2DO 服务信息
+     * @param ServerInfoV2DTO 服务信息
      */
-    public void addServerInfoV2DO(ServerInfoV2DO serverInfoV2DO);
+    public void addServerInfoV2DO(ServerInfoV2DTO ServerInfoV2DTO);
 
     /**
      * 修改服务信息
