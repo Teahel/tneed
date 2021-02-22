@@ -25,6 +25,7 @@
                         </el-col>
                         <el-col :span="3" :offset="11">
                             <el-link :underline="false">欢迎：<span id="authentication" sec:authentication="name"></span></el-link>
+                            <span   v-show="false" th:id="role" sec:authentication="principal.authorities"></span>
                         </el-col>
                         <el-col :span="1">
                             <el-link :underline="false" href="/user/index" >主页</el-link>
@@ -33,6 +34,11 @@
                             <el-button type="text" @click="dialogUserVisible = true">修改账户信息</el-button>
                        <!--     <el-link :underline="false"  href="/index"  >修改密码</el-link>-->
                         </el-col>
+
+                        <el-col :span="1" :offset="1">
+                            <el-button  v-show="addServerButtonVisible" type="text">添加账户</el-button>
+                        </el-col>
+
                     </el-row>
 
                 </el-header>

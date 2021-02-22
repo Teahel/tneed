@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.time.LocalDateTime;
 
 /**
@@ -15,9 +16,9 @@ import java.time.LocalDateTime;
  * @date： 2021-02-01
  */
 @Data
-@Entity
+@Entity(name = "Server_Info")
 @NoArgsConstructor
-public class ServerInfoV2DO {
+public class ServerInfoEntity {
 
     /**
      * 主键
@@ -29,7 +30,7 @@ public class ServerInfoV2DO {
     /**
      * 账户id
      */
-    private Long userid;
+    private String username;
 
     /**
      * 服务名称
@@ -69,9 +70,16 @@ public class ServerInfoV2DO {
     private LocalDateTime modifiedTime;
 
 
+    /**
+     * 图片
+     */
+    @Transient
+    private MultipartFile image;
+
     /*
     主键 id
     服务名称 server_name
+    用户名称 username
     服务地址 location
     图片地址 image_address
     服务状态 server_status

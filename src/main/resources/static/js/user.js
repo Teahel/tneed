@@ -38,7 +38,9 @@ new Vue({
                 checkPass: [
                     { validator: validatePass2, trigger: 'blur' }
                 ],
-            }
+            },
+            addServerButtonVisible:true
+
         }
     },
     created:function(){
@@ -46,6 +48,10 @@ new Vue({
     },
     methods:{
        findUser:function (){
+           var roles = $("#role")[0].innerText
+           if(!roles.includes("ROLE_ADMIN")){
+               addServerButtonVisible = false;
+           }
            var authentication = $('#authentication');
            if(authentication == undefined || authentication == ""){
                return;
