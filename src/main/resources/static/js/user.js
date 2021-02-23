@@ -48,6 +48,10 @@ new Vue({
     },
     methods:{
        findUser:function (){
+           /**
+            * 获取角色
+            * @type {string}
+            */
            var roles = $("#role")[0].innerText
            if(!roles.includes("ROLE_ADMIN")){
                addServerButtonVisible = false;
