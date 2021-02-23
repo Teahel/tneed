@@ -56,7 +56,8 @@ new Vue({
             addServerButtonVisible:true,
             dialogButton:false,
             token:"",
-            username:""
+            username:"",
+            fullscreenLoading: false
         }
     },
     created:function(){
@@ -126,6 +127,7 @@ new Vue({
          */
        updatePassword:function (data) {
           this.dialogUserVisible = false;
+          let self = this;
           axios.post('/user/update', {
                 username:this.username,
                 password:this.ruleForm.checkPass,
@@ -140,7 +142,18 @@ new Vue({
                        }
                    }).then(function (response) {
                        if(200 == response.status){
-                           window.location = "/login"
+                           self.fullscreenLoading = true;
+                           self.$message({
+                               duration:3000,
+                               message: '恭喜你，这是一条成功消息',
+                               type: 'success'
+                           });
+                           setTimeout(() => {
+                               self.fullscreenLoading = false;
+                              window.location = "/login"
+                       }, 3000);
+
+
                        }
                    }).catch(function (error) {
                        console.log(error);
