@@ -143,17 +143,15 @@ new Vue({
                    }).then(function (response) {
                        if(200 == response.status){
                            self.fullscreenLoading = true;
-                           self.$message({
-                               duration:3000,
-                               message: '恭喜你，这是一条成功消息',
-                               type: 'success'
-                           });
                            setTimeout(() => {
                                self.fullscreenLoading = false;
+                               self.$message({
+                                   duration:3000,
+                                   message: '恭喜你，这是一条成功消息',
+                                   type: 'success'
+                               });
                               window.location = "/login"
-                       }, 3000);
-
-
+                        }, 3000);
                        }
                    }).catch(function (error) {
                        console.log(error);

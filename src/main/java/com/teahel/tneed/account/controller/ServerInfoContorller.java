@@ -17,7 +17,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/server/v2")
+@RequestMapping("/serverInfo")
 public class ServerInfoContorller {
 
     @Autowired
@@ -35,12 +35,12 @@ public class ServerInfoContorller {
 
     /**
      * 新增服务信息
-     * @param serverInfoDto 服务信息
+     * @param serverInfo 服务信息
      * @return 执行结果
      */
     @PostMapping("/save")
-    public ResultUtils save(@RequestBody ServerInfoEntity serverInfoDto){
-        serverInfoService.addServerInfo(serverInfoDto);
+    public ResultUtils save(@RequestBody ServerInfoEntity serverInfo){
+        serverInfoService.addServerInfo(serverInfo);
         return ResultUtils.ok();
     }
 

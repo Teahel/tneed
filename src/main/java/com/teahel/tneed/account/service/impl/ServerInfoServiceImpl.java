@@ -2,14 +2,12 @@ package com.teahel.tneed.account.service.impl;
 
 import com.teahel.tneed.account.dao.ServerInfoRepository;
 import com.teahel.tneed.account.entity.ServerInfoEntity;
-
 import com.teahel.tneed.account.service.ServerInfoService;
 import com.teahel.tneed.common.PropertyConfig;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -65,7 +63,7 @@ public class ServerInfoServiceImpl implements ServerInfoService {
         try{
             serverInfoEntity.getImage().transferTo(imageFile);
         }catch (IOException e){
-            log.error("保存图片失败",e.getMessage());
+            throw new RuntimeException("保存图片失败",e.getCause());
         }
         //保存文件名 使得可以远程下载图片
         serverInfoV2DO.setImageAddress(propertyConfig.getImageAddress()+filePath);

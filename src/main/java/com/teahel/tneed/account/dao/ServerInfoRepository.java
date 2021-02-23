@@ -1,14 +1,8 @@
 package com.teahel.tneed.account.dao;
 
 import com.teahel.tneed.account.entity.ServerInfoEntity;
-
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
 
-import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -21,10 +15,10 @@ public interface ServerInfoRepository extends JpaRepository<ServerInfoEntity, Lo
 
     /**
      * 新增服务信息
-     * @param serverInfoV2DO 服务信息
+     * @param serverInfoEntity 服务信息
      * @return 存储结果
      */
-    ServerInfoEntity save (ServerInfoEntity serverInfoV2DO);
+    ServerInfoEntity save (ServerInfoEntity serverInfoEntity);
 
     /**
      * 修改服务信息
