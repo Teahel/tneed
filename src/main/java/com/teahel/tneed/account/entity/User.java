@@ -62,6 +62,12 @@ public class User {
      */
     private LocalDateTime effectiveTime;
 
+    /**
+     * 旧密码
+     */
+    @Transient
+    private String oldPassword;
+
     public User(String username, String password, List<Role> roles,LocalDateTime createTime,LocalDateTime effectiveTime,String inviteCode) {
         this.username = username;
         this.password = password;

@@ -20,9 +20,11 @@ public interface IUserService {
 
     /**
      * 修改账户密码
-     * @param password 密码
-     * @param username 用户名
+     * @param password 新密码
+     * @param oldPassword 旧密码
+     * @param username 账户
+     * @return 操作结果
      */
-    public void updateUser(String password,String username);
+    void updateUsername(String password,String oldPassword,String username);
 
 }

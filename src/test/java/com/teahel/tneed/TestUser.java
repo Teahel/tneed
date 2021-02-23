@@ -51,7 +51,7 @@ public class TestUser extends TneedApplicationTests{
 
     @Test
     public void updateUser(){
-        userService.updateUser("12","zhangsan");
+       // userService.updateUser("12","zhangsan");
     }
 
     /**

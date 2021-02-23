@@ -84,7 +84,6 @@ public class ServerInfoServiceImpl implements ServerInfoService {
         Optional<ServerInfoEntity> serverInfoEntity = repository.findById(id);
         serverInfoEntity.get().setServerStatus(serverStatus);
         repository.save(serverInfoEntity.get());
-
     }
 
 

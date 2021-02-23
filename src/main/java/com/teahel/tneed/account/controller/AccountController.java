@@ -4,10 +4,7 @@ import com.teahel.tneed.account.entity.User;
 import com.teahel.tneed.account.service.IUserService;
 import com.teahel.tneed.common.ResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @version 1.0
@@ -33,10 +30,16 @@ public class AccountController {
         return ResultUtils.ok(u);
     }
 
-    /*@PostMapping("/update")
+    /**
+     * 修改账户密码
+     * user 用户信息
+     * @return 操作结果
+     */
+    @PostMapping("/update")
     public ResultUtils update(@RequestBody User user){
-
-    }*/
+        userService.updateUsername(user.getPassword(),user.getOldPassword(),user.getUsername());
+        return ResultUtils.ok();
+    }
 
 
 }

@@ -3,18 +3,25 @@ package com.teahel.tneed.account.service.impl;
 import com.teahel.tneed.account.dao.UserRepository;
 import com.teahel.tneed.account.entity.User;
 import com.teahel.tneed.account.service.IUserService;
+
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class UserImpl implements IUserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    final EntityManager entityManager;
 
     /**
      * 保存账户
@@ -49,14 +56,22 @@ public class UserImpl implements IUserService {
 
     /**
      * 修改账户密码
-     * @param password 密码
-     * @param username 用户名
+     * @param password 新密码
+     * @param oldPassword 旧密码
+     * @param username 账户
+     * @return 操作结果
      */
     @Override
-    public void updateUser(String password,String username) {
+    public void updateUsername(String password,String oldPassword,String username){
+        User user = userRepository.findByUsername(username);
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        String newPassword = encoder.encode(password);
-        userRepository.updateUser(newPassword,username);
+        if(user == null || !encoder.matches(oldPassword,user.getPassword())){
+            throw new RuntimeException("请输入正确的原密码！");
+        }
+        if(encoder.matches(password,user.getPassword())){
+            throw new RuntimeException("原密码与新密码相同！");
+        }
+        userRepository.updateUser(encoder.encode(password),username);
     }
 
 

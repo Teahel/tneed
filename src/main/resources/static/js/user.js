@@ -1,6 +1,16 @@
 new Vue({
     el: '#user',
     data: function() {
+        var validPassOldPassword = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('请输入密码'));
+            } else {
+                if (this.ruleForm.oldPassword !== '') {
+                    this.$refs.ruleForm.validateField('passOldPassword');
+                }
+                callback();
+            }
+        };
         var validatePass = (rule, value, callback) => {
             if (value === '') {
                 callback(new Error('请输入密码'));
@@ -30,6 +40,7 @@ new Vue({
             ruleForm: {
                 pass: '',
                 checkPass: '',
+                oldPassword:''
             },
             rules: {
                 pass: [
@@ -38,9 +49,14 @@ new Vue({
                 checkPass: [
                     { validator: validatePass2, trigger: 'blur' }
                 ],
+                oldPassword:[
+                    { validator: validPassOldPassword, trigger: 'blur' }
+                ]
             },
-            addServerButtonVisible:true
-
+            addServerButtonVisible:true,
+            dialogButton:false,
+            token:"",
+            username:""
         }
     },
     created:function(){
@@ -61,6 +77,8 @@ new Vue({
                return;
            }
            var token = $("meta[name='_csrf']").attr("content");
+           this.token = token;
+           this.username = authentication[0].innerText;
            var tableData = this.tableData;
            let self = this;
 
@@ -101,32 +119,44 @@ new Vue({
                console.log(error);
            });
 
+       },
+        /**
+         * 修改密码
+         * @param data
+         */
+       updatePassword:function (data) {
+          this.dialogUserVisible = false;
+          axios.post('/user/update', {
+                username:this.username,
+                password:this.ruleForm.checkPass,
+                oldPassword:this.ruleForm.oldPassword
+          },{headers: {
+                   'X-XSRF-TOKEN': this.token
+               }
+          }).then(function (response) {
+               if(200 == response.status){
+                   axios.post('/logout', {headers: {
+                           'X-XSRF-TOKEN': this.token
+                       }
+                   }).then(function (response) {
+                       if(200 == response.status){
+                           window.location = "/login"
+                       }
+                   }).catch(function (error) {
+                       console.log(error);
+                   });
+               }
 
+          }).catch(function (error) {
+               console.log(error);
+          });
+          this.resetForm(data);
 
        },
-       updateUser:function () {
-
-       },
-        handleClose(done) {
-            this.$confirm('确认关闭？')
-                .then(_ => {
-                done();
-        })
-        .catch(_ => {});
-        },
-        submitForm:function(formName) {
-            this.$refs[formName].validate((valid) => {
-                if (valid) {
-                    alert('submit!');
-                } else {
-                    console.log('error submit!!');
-            return false;
-        }
-        });
-        },
         resetForm:function(formName) {
             this.$refs[formName].resetFields();
-        }
+        },
+
        
     }
 })
