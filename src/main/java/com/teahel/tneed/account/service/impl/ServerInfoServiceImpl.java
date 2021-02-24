@@ -55,7 +55,6 @@ public class ServerInfoServiceImpl implements ServerInfoService {
     public void addServerInfo(ServerInfoEntity serverInfoEntity) {
 
         ServerInfoEntity serverInfoV2DO = new ServerInfoEntity();
-
         serverInfoV2DO.setModifiedTime(LocalDateTime.now());
         String fileName = serverInfoEntity.getImage().getOriginalFilename();
         String filePath = UUID.randomUUID()+ FilenameUtils.getExtension(fileName);

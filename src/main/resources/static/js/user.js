@@ -57,7 +57,8 @@ new Vue({
             dialogButton:false,
             token:"",
             username:"",
-            fullscreenLoading: false
+            fullscreenLoading: false,
+            addServerDialogVisible:false //新增服务信息dialog
         }
     },
     created:function(){

@@ -4,10 +4,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 /**
@@ -16,7 +14,7 @@ import java.time.LocalDateTime;
  * @date： 2021-02-01
  */
 @Data
-@Entity(name = "Server_Info")
+@Entity(name = "server_info")
 @NoArgsConstructor
 public class ServerInfoEntity {
 
@@ -30,16 +28,19 @@ public class ServerInfoEntity {
     /**
      * 账户id
      */
+    @NotBlank(message = "账户信息不能为空")
     private String username;
 
     /**
      * 服务名称
      */
+    @NotBlank(message = "服务名称不能为空")
     private String serverName;
 
     /**
      * 地区
      */
+    @NotBlank(message = "地区不能为空")
     private String location;
 
     /**

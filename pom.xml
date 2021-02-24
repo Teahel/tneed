@@ -12,11 +12,36 @@
 	<artifactId>tneed</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>tneed</name>
+	<packaging>war</packaging>
 	<description>for shop </description>
 
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
+
+
+	<!--环境配置-->
+	<profiles>
+		<!--开发环境-->
+		<profile>
+			<id>dev</id>
+			<properties>
+				<profileActive>dev</profileActive>
+			</properties>
+		</profile>
+		<!--生产环境-->
+		<profile>
+			<id>pro</id>
+			<properties>
+				<profileActive>pro</profileActive>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+
+	</profiles>
+
 
 	<dependencies>
         <dependency>
@@ -111,13 +136,51 @@
 			<version>2.6</version>
 		</dependency>
 
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>2.0.1.Final</version>
+		</dependency>
+
 	</dependencies>
 
+
+
 	<build>
+		<finalName>tneed</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+			<!--修改版本-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.4.3</version>
+			</plugin>
+			<!---->
+
+			<!-- 用于拷贝maven依赖的plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.10</version>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<!-- 把依赖的所有maven jar包拷贝到lib目录中（这样所有的jar包都在lib目录中） -->
+							<outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/lib
+							</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
