@@ -36,7 +36,7 @@
                         </el-col>
 
                         <el-col :span="1" :offset="1">
-                            <el-button  v-show="addServerButtonVisible" type="text">添加服务账户</el-button>
+                            <el-button  type="text" @click="addServerInfoDialog" >添加服务账户</el-button>
                         </el-col>
 
                     </el-row>
@@ -56,7 +56,7 @@
                             width="30%"
                     >
 
-                        <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+                        <el-form :model="ruleForm"  :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
 
                             <el-form-item label="旧密码" prop="passOldPassword">
                                 <el-input type="password" v-model="ruleForm.oldPassword" autocomplete="off"></el-input>
@@ -82,16 +82,31 @@
                     <!-- 新建服务-->
                     <el-dialog
                             show-close:false
-                            title="修改密码"
+                            title="新建服务账户"
                             :visible.sync="addServerDialogVisible"
-                            width="40%"
+                            width="30%"
                     >
 
+                    <el-form ref="form" :model="server"  label-width="100px">
+
+                        <el-form-item label="用户名称">
+                            <el-input v-model="server.username" maxlength="10" size="small"  clearable></el-input>
+                        </el-form-item>
+                        <el-form-item label="服务名称">
+                            <el-input v-model="server.serverName"  maxlength="10"size="small" clearable ></el-input>
+                        </el-form-item>
+                        <el-form-item label="服务地址">
+                            <el-input v-model="server.location"  maxlength="10" size="small"  clearable></el-input>
+                        </el-form-item>
+                        <el-form-item label="照片地址">
+                            <el-input v-model="server.image"></el-input>
+                        </el-form-item>
+                        <el-form-item label="备注">
+                            <el-input v-model="server.remark"  maxlength="30" clearable></el-input>
+                        </el-form-item>
 
 
-
-
-
+                    </el-form>
 
                     </el-dialog>
 

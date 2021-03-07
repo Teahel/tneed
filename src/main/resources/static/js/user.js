@@ -58,7 +58,15 @@ new Vue({
             token:"",
             username:"",
             fullscreenLoading: false,
-            addServerDialogVisible:false //新增服务信息dialog
+            addServerDialogVisible:false, //新增服务信息显示控制dialog
+            server:{
+                username:'',
+                serverName:'',
+                location:'',
+                serverLink:'',
+                remark:'',
+                image:''
+            }
         }
     },
     created:function(){
@@ -168,7 +176,9 @@ new Vue({
         resetForm:function(formName) {
             this.$refs[formName].resetFields();
         },
-
+        addServerInfoDialog:function (){
+            this.addServerDialogVisible = true;
+        }
        
     }
 })
