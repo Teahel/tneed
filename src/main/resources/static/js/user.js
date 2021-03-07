@@ -87,7 +87,7 @@ new Vue({
            /**
             * 查询用户信息
             */
-           axios.post('/user/select', {
+           axios.post('/tneed/user/select', {
                username:authentication[0].innerText,
            },{headers: {
                    'X-XSRF-TOKEN': token
@@ -107,7 +107,7 @@ new Vue({
            /**
             * 查询服务信息
             */
-           axios.post('/server/v2/select', {
+           axios.post('/tneed/server/v2/select', {
               // username:authentication[0].innerText,
            },{headers: {
                    'X-XSRF-TOKEN': token
@@ -129,7 +129,7 @@ new Vue({
        updatePassword:function (data) {
           this.dialogUserVisible = false;
           let self = this;
-          axios.post('/user/update', {
+          axios.post('/tneed/user/update', {
                 username:this.username,
                 password:this.ruleForm.checkPass,
                 oldPassword:this.ruleForm.oldPassword
@@ -138,7 +138,7 @@ new Vue({
                }
           }).then(function (response) {
                if(200 == response.status){
-                   axios.post('/logout', {headers: {
+                   axios.post('/tneed/logout', {headers: {
                            'X-XSRF-TOKEN': this.token
                        }
                    }).then(function (response) {
@@ -151,7 +151,7 @@ new Vue({
                                    message: '恭喜你，这是一条成功消息',
                                    type: 'success'
                                });
-                              window.location = "/login"
+                              window.location = "/tneed/login"
                         }, 3000);
                        }
                    }).catch(function (error) {

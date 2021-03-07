@@ -10,8 +10,8 @@
 	</parent>
 	<groupId>com.teahel</groupId>
 	<artifactId>tneed</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>tneed</name>
+	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<description>for shop </description>
 
@@ -20,16 +20,16 @@
 	</properties>
 
 
-	<!--环境配置-->
+	<!--&lt;!&ndash;环境配置&ndash;&gt;
 	<profiles>
-		<!--开发环境-->
+		&lt;!&ndash;开发环境&ndash;&gt;
 		<profile>
 			<id>dev</id>
 			<properties>
 				<profileActive>dev</profileActive>
 			</properties>
 		</profile>
-		<!--生产环境-->
+		&lt;!&ndash;生产环境&ndash;&gt;
 		<profile>
 			<id>pro</id>
 			<properties>
@@ -40,7 +40,7 @@
 			</activation>
 		</profile>
 
-	</profiles>
+	</profiles>-->
 
 
 	<dependencies>
@@ -63,8 +63,33 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<!-- 移除嵌入式tomcat插件 -->
+			<!--<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>-->
+
 		</dependency>
 
+		<!-- 支持打包 -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-servlet-api</artifactId>
+			<version>8.0.36</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- 支持打包 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -145,42 +170,13 @@
 	</dependencies>
 
 
-
 	<build>
 		<finalName>tneed</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-
-			<!--修改版本-->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
 				<version>2.4.3</version>
-			</plugin>
-			<!---->
-
-			<!-- 用于拷贝maven依赖的plugin -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<version>2.10</version>
-				<executions>
-					<execution>
-						<id>copy-dependencies</id>
-						<phase>compile</phase>
-						<goals>
-							<goal>copy-dependencies</goal>
-						</goals>
-						<configuration>
-							<!-- 把依赖的所有maven jar包拷贝到lib目录中（这样所有的jar包都在lib目录中） -->
-							<outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/lib
-							</outputDirectory>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>

@@ -25,7 +25,8 @@ public interface ServerInfoRepository extends JpaRepository<ServerInfoEntity, Lo
      * @param serverStatus 设备状态
      * @param id 主键
      */
-  /*  @Modifying(clearAutomatically=true)
+    /*
+    @Modifying(clearAutomatically=true)
     @Transactional
     @Query("update ServerInfoEntity  s set s.serverStatus = ?1 where s.id = ?2")
     void modifyServerStatus(Integer serverStatus,Long id);*/

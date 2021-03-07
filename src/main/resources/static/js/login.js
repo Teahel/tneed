@@ -39,9 +39,9 @@ new Vue({
             },function (res){
                 console.log("失败")
             });*/
-            $.ajax({type:'POST',url:"/login",async:false,data:{'_csrf':token,username:this.username,password:this.password},
+            $.ajax({type:'POST',url:"/tneed/login",async:false,data:{'_csrf':token,username:this.username,password:this.password},
                 success:function(result){
-                    window.location.href = "/user/index";
+                    window.location.href = "/tneed/user/index";
                 }});
         }
     }
