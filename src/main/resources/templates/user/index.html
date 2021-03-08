@@ -87,7 +87,7 @@
                             width="30%"
                     >
 
-                    <el-form ref="form" :model="server"  label-width="100px">
+                    <el-form  :model="server" ref="server"   label-width="100px">
 
                         <el-form-item label="用户名称">
                             <el-input v-model="server.username" maxlength="10" size="small"  clearable></el-input>
@@ -98,19 +98,21 @@
                         <el-form-item label="服务地址">
                             <el-input v-model="server.location"  maxlength="10" size="small"  clearable></el-input>
                         </el-form-item>
-                        <el-form-item label="照片地址">
-                            <el-input v-model="server.image"></el-input>
+                        <el-form-item label="照片">
+                            <el-input type="file" name="file" @change="getFile($event)" accept="image/*"></el-input>
                         </el-form-item>
                         <el-form-item label="备注">
                             <el-input v-model="server.remark"  maxlength="30" clearable></el-input>
                         </el-form-item>
 
+                        <el-form-item label-width="0">
+                            <el-button type="primary" @click="submitServerSubmit('server')">提交</el-button>
+                            <el-button native-type="reset">重置</el-button>
+                        </el-form-item>
 
                     </el-form>
 
                     </el-dialog>
-
-
 
 
                     <el-row :gutter="0" >

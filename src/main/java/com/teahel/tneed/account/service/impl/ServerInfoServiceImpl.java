@@ -61,13 +61,14 @@ public class ServerInfoServiceImpl implements ServerInfoService {
         File imageFile = new File(filePath);
         try{
             serverInfoEntity.getImage().transferTo(imageFile);
+            //保存文件名 使得可以远程下载图片
+            serverInfoV2DO.setImageAddress(propertyConfig.getImageAddress()+filePath);
+
+            repository.save(serverInfoV2DO);
         }catch (IOException e){
             throw new RuntimeException("保存图片失败",e.getCause());
         }
-        //保存文件名 使得可以远程下载图片
-        serverInfoV2DO.setImageAddress(propertyConfig.getImageAddress()+filePath);
 
-        repository.save(serverInfoV2DO);
     }
 
     /**

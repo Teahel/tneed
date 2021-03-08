@@ -22,6 +22,8 @@ import java.util.UUID;
 
 public class TestUser extends TneedApplicationTests{
 
+    /**/
+
     @Autowired
     private UserRepository repository;
 

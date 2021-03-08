@@ -115,7 +115,7 @@ new Vue({
            /**
             * 查询服务信息
             */
-           axios.post('/tneed/server/v2/select', {
+           axios.post('/tneed/server/select', {
               // username:authentication[0].innerText,
            },{headers: {
                    'X-XSRF-TOKEN': token
@@ -178,7 +178,29 @@ new Vue({
         },
         addServerInfoDialog:function (){
             this.addServerDialogVisible = true;
+        },
+        resetServerInfoForm:function (formName) {
+            this.$refs[formName].resetFields();
+        },
+        getFile (event) {
+            this.server.image = event.target.files[0];
+        },
+        submitServerSubmit:function (data) {
+            axios.post('/tneed/serverInfo/save', {
+                serverName:this.server.serverName,
+                location:this.server.location,
+                serverLink:this.server.serverLink,
+                image:this.server.image
+            },{headers: {
+                    'X-XSRF-TOKEN': this.token,
+                    'Content-Type':"multipart/form-data"
+                }
+            }).then(function (response) {
+                 console.log(response)
+            }).catch(function (error) {
+                console.log(error);
+            });
         }
-       
+
     }
 })
