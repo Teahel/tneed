@@ -5,6 +5,7 @@ new Vue({
             username: "",
             password: "",
             loading: false,
+            email:''
         }
     },
     methods:{

@@ -3,13 +3,10 @@ package com.teahel.tneed.account.service.impl;
 import com.teahel.tneed.account.dao.UserRepository;
 import com.teahel.tneed.account.entity.User;
 import com.teahel.tneed.account.service.IUserService;
-
 import com.teahel.tneed.common.EmailUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -114,7 +111,7 @@ public class UserImpl implements IUserService {
                     .toString();
 
             //随机密码生产之后发送目标账户邮箱
-            emailUtils.sendEmail(username,password);
+            emailUtils.sendEmail(username,"这是你的新密码,如你不是账户主任,请忽略一下密码  \n\n "+password);
 
             //保存重置后密码
             PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
