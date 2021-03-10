@@ -4,14 +4,18 @@ import com.teahel.tneed.account.dao.UserRepository;
 import com.teahel.tneed.account.entity.User;
 import com.teahel.tneed.account.service.IUserService;
 
+import com.teahel.tneed.common.EmailUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
+import java.util.Random;
 
 @Service
 @Slf4j
@@ -22,6 +26,10 @@ public class UserImpl implements IUserService {
     private UserRepository userRepository;
 
     final EntityManager entityManager;
+
+    @Autowired
+    private EmailUtils emailUtils;
+
 
     /**
      * 保存账户
@@ -72,6 +80,50 @@ public class UserImpl implements IUserService {
             throw new RuntimeException("原密码与新密码相同！");
         }
         userRepository.updateUser(encoder.encode(password),username);
+    }
+
+    /**
+     * 根据账户名称查询账户
+     *
+     * @param username 账户名称
+     * @return 查询结果
+     */
+    @Override
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    /**
+     * 重置密码
+     *
+     * @param username 账户
+     */
+    @Override
+    public void resetPassword(String username) {
+        try{
+            //生产随机密码 10位 数字和字母
+            int leftLimit = 48; // numeral '0'
+            int rightLimit = 122; // letter 'z'
+            int targetStringLength = 10;
+            Random random = new Random();
+
+            String password = random.ints(leftLimit, rightLimit + 1)
+                    .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+                    .limit(targetStringLength)
+                    .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                    .toString();
+
+            //随机密码生产之后发送目标账户邮箱
+            emailUtils.sendEmail(username,password);
+
+            //保存重置后密码
+            PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+            userRepository.updateUser(encoder.encode(password),username);
+        }catch (Exception e){
+            log.error("密码重置异常");
+            throw new RuntimeException("密码重置错误:"+username);
+        }
+
     }
 
 

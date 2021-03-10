@@ -10,11 +10,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityManager;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -48,23 +51,33 @@ public class ServerInfoServiceImpl implements ServerInfoService {
 
     /**
      * 新增服务信息
-     *
-     * @param serverInfoEntity 服务信息
+     * @param image 图片
+     * @param serverName 服务名称
+     * @param username 账户名
+     * @param location 地址
+     * @param serverLink 服务链接
+     * @param remark 备注
+     * @return 存储结果
      */
     @Override
-    public void addServerInfo(ServerInfoEntity serverInfoEntity) {
-
-        ServerInfoEntity serverInfoV2DO = new ServerInfoEntity();
-        serverInfoV2DO.setModifiedTime(LocalDateTime.now());
-        String fileName = serverInfoEntity.getImage().getOriginalFilename();
-        String filePath = UUID.randomUUID()+ FilenameUtils.getExtension(fileName);
-        File imageFile = new File(filePath);
+    public void addServerInfo(MultipartFile image, String serverName, String username, String location, String serverLink, String remark) {
         try{
-            serverInfoEntity.getImage().transferTo(imageFile);
-            //保存文件名 使得可以远程下载图片
-            serverInfoV2DO.setImageAddress(propertyConfig.getImageAddress()+filePath);
-
-            repository.save(serverInfoV2DO);
+        ServerInfoEntity serverInfo = new ServerInfoEntity();
+        serverInfo.setModifiedTime(LocalDateTime.now());
+        String fileName = image.getOriginalFilename();
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd_HHmmss");
+        String path = df.format(new Date())+"_tneed_"+ UUID.randomUUID()+"."+FilenameUtils.getExtension(fileName);
+        String fileAddress= propertyConfig.getIamgeFile()+"/"+path;//文件保存位置
+        String url = propertyConfig.getImageAddress()+"/"+path; //文件访问路径
+        File imageFile = new File(fileAddress);
+        image.transferTo(imageFile);
+        serverInfo.setImageAddress(url);
+        serverInfo.setServerName(serverName);
+        serverInfo.setUsername(username);
+        serverInfo.setLocation(location);
+        serverInfo.setServerLink(serverLink);
+        serverInfo.setRemark(remark);
+        repository.save(serverInfo);
         }catch (IOException e){
             throw new RuntimeException("保存图片失败",e.getCause());
         }
@@ -83,6 +96,7 @@ public class ServerInfoServiceImpl implements ServerInfoService {
         serverInfoEntity.get().setServerStatus(serverStatus);
         repository.save(serverInfoEntity.get());
     }
+
 
 
 }

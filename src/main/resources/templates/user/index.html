@@ -28,7 +28,7 @@
                             <span   v-show="false" th:id="role" sec:authentication="principal.authorities"></span>
                         </el-col>
                         <el-col :span="1">
-                            <el-link :underline="false" href="/user/index" >主页</el-link>
+                            <el-link :underline="false" href="/tneed/user/index" >主页</el-link>
                         </el-col>
                         <el-col :span="1">
                             <el-button type="text" @click="dialogUserVisible = true">修改账户信息</el-button>
@@ -89,18 +89,21 @@
 
                     <el-form  :model="server" ref="server"   label-width="100px">
 
-                        <el-form-item label="用户名称">
-                            <el-input v-model="server.username" maxlength="10" size="small"  clearable></el-input>
-                        </el-form-item>
+
                         <el-form-item label="服务名称">
                             <el-input v-model="server.serverName"  maxlength="10"size="small" clearable ></el-input>
                         </el-form-item>
                         <el-form-item label="服务地址">
                             <el-input v-model="server.location"  maxlength="10" size="small"  clearable></el-input>
                         </el-form-item>
-                        <el-form-item label="照片">
-                            <el-input type="file" name="file" @change="getFile($event)" accept="image/*"></el-input>
+                        <el-form-item label="二维码">
+                            <el-input type="file" id="file" v-model="server.image"  accept="image/*"></el-input>
                         </el-form-item>
+
+                        <el-form-item label="服务链接">
+                            <el-input v-model="server.serverLink" maxlength="800" size="small"  clearable></el-input>
+                        </el-form-item>
+
                         <el-form-item label="备注">
                             <el-input v-model="server.remark"  maxlength="30" clearable></el-input>
                         </el-form-item>

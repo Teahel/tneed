@@ -41,5 +41,13 @@ public class AccountController {
         return ResultUtils.ok();
     }
 
+    @PostMapping("/resetPassword")
+    public ResultUtils resetPassword(@RequestParam(value = "email") String email){
+        if(userService.findByUsername(email) == null){
+           return ResultUtils.error("用户不存在");
+        };
+
+        return ResultUtils.ok();
+    }
 
 }

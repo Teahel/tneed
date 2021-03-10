@@ -15,4 +15,10 @@ public class PropertyConfig {
 
     @Value("${file.path}")
     private String imageAddress;
+
+    @Value("${image.file}")
+    private String iamgeFile;
+
+    @Value("${default.password}")
+    private String defaultPassword;
 }

@@ -54,4 +54,5 @@ public interface ServerInfoRepository extends JpaRepository<ServerInfoEntity, Lo
      */
      void deleteById(Long id);
 
+
 }

@@ -35,6 +35,9 @@ public class UserController {
         return "login";
     }
 
-
+    @RequestMapping("/misspassword")
+    public String misspassword() {
+        return "misspassword";
+    }
 
 }

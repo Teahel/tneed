@@ -179,26 +179,41 @@ new Vue({
         addServerInfoDialog:function (){
             this.addServerDialogVisible = true;
         },
-        resetServerInfoForm:function (formName) {
-            this.$refs[formName].resetFields();
-        },
-        getFile (event) {
-            this.server.image = event.target.files[0];
+        resetServerInfoForm:function () {
+            this.server='';
         },
         submitServerSubmit:function (data) {
-            axios.post('/tneed/serverInfo/save', {
-                serverName:this.server.serverName,
-                location:this.server.location,
-                serverLink:this.server.serverLink,
-                image:this.server.image
-            },{headers: {
-                    'X-XSRF-TOKEN': this.token,
-                    'Content-Type':"multipart/form-data"
+            let self = this;
+            var imagefile = document.querySelector('#file');
+            this.server.image = imagefile.files[0];
+            var data = new FormData();
+            data.append("username",this.username);
+            data.append("serverName",this.server.serverName);
+            data.append("location",this.server.location);
+            data.append("serverLink",this.server.serverLink);
+            data.append("image",this.server.image);
+            data.append("_csrf",this.token);
+            $.ajax({
+                url: '/tneed/serverInfo/save',
+                type: 'POST',
+                data,
+                cache: false, //设置是否第二次是否从缓存中读取
+                processData: false,//将数据类型序列换成application/x-www-form-urlencoded ，fasle表示关闭
+                contentType: false,//默认值为application/x-www-form-urlencoded，false表示关闭
+                success:function(data){
+                    if(data.code==0){
+                        self.addServerDialogVisible = false;
+                        self.$message({
+                            message: '操作成功',
+                            type: 'success'
+                        });
+                        self.resetServerInfoForm()
+                    } else {
+                        self.addServerDialogVisible = false;
+                        self.$message.error('操作失败');
+                        self.resetServerInfoForm()
+                    }
                 }
-            }).then(function (response) {
-                 console.log(response)
-            }).catch(function (error) {
-                console.log(error);
             });
         }
 

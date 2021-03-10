@@ -27,4 +27,17 @@ public interface IUserService {
      */
     void updateUsername(String password,String oldPassword,String username);
 
+    /**
+     * 根据账户名称查询账户
+     * @param username 账户名称
+     * @return 查询结果
+     */
+    User findByUsername(String username);
+
+    /**
+     * 重置密码
+     * @param username 账户
+     */
+    void resetPassword(String username);
+
 }

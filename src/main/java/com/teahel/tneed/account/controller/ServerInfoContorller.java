@@ -7,7 +7,9 @@ import com.teahel.tneed.account.service.ServerInfoService;
 import com.teahel.tneed.common.ResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServlet;
 import java.util.List;
 
 /**
@@ -35,12 +37,17 @@ public class ServerInfoContorller {
 
     /**
      * 新增服务信息
-     * @param serverInfo 服务信息
-     * @return 执行结果
+     * @param image 图片
+     * @param serverName 服务名称
+     * @param username 账户名
+     * @param location 地址
+     * @param serverLink 服务链接
+     * @param remark 备注
+     * @return 存储结果
      */
-    @PostMapping("/save")
-    public ResultUtils save(@RequestBody ServerInfoEntity serverInfo){
-        serverInfoService.addServerInfo(serverInfo);
+    @PostMapping(value = "/save")
+    public ResultUtils save(@RequestParam("image") MultipartFile image,String serverName,String username,String location,String serverLink,String remark){
+        serverInfoService.addServerInfo(image,serverName,username,location,serverLink,remark);
         return ResultUtils.ok();
     }
 
