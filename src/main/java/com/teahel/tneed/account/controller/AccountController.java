@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
  */
 
 @RestController
-@RequestMapping("/user")
 public class AccountController {
 
     @Autowired
@@ -24,7 +23,7 @@ public class AccountController {
      * @param user 查询条件：账户名称
      * @return 查询结果
      */
-    @PostMapping("/select")
+    @PostMapping("/user/select")
     public ResultUtils select(@RequestBody User user){
         User u = userService.findUser(user);
         return ResultUtils.ok(u);
@@ -35,18 +34,18 @@ public class AccountController {
      * user 用户信息
      * @return 操作结果
      */
-    @PostMapping("/update")
+    @PostMapping("/user/update")
     public ResultUtils update(@RequestBody User user){
         userService.updateUsername(user.getPassword(),user.getOldPassword(),user.getUsername());
         return ResultUtils.ok();
     }
 
-    @PostMapping("/resetPassword")
-    public ResultUtils resetPassword(@RequestParam(value = "email") String email){
+    @PostMapping("/userinfo/resetPassword")
+    public ResultUtils resetPassword(String email){
         if(userService.findByUsername(email) == null){
            return ResultUtils.error("用户不存在");
         };
-
+        userService.resetPassword(email);
         return ResultUtils.ok();
     }
 
