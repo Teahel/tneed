@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>二静</title>
+    <meta charset="utf-8" />
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+    <!-- elementUI css文件-->
+    <link rel="stylesheet" href="/css/index.css" th:href="@{/css/index.css}" />
+
+    <!-- 登录界面css -->
+    <link rel="stylesheet" href="/css/misspassword.css" th:href="@{/css/misspassword.css}" />
+    <script type="text/javascript"   th:src="@{/js/jquery-1.7.2.js}"></script>
+
+</head>
+<body>
+<!--<form action="/tneed/register" method="post">
+    <ul>
+        <li class="top_1">
+
+            <input type="text" name="username" placeholder=" 邮箱/用户名/已验证手机" class="user" />
+        </li>
+        <li>
+            <input type="text" id="roles" th:value="${inviteCode}">
+
+            <input type="password" name="password" placeholder=" 密码" class="password" />
+        </li>
+        <li class="ent"><button type="submit" class="btn2"><a>登 &nbsp; &nbsp;录</a></button></li>
+    </ul>
+     th:value="${inviteCode}
+</form>-->
+
+ <div id="register">
+
+
+<el-dialog
+            title="注册"
+            width="30%"
+            :visible.sync="visibleDialog"
+
+    >
+
+        <el-form label-width="100px" class="demo-dynamic" ref="user" :model="user"   label-position="top" >
+
+            <input type="hidden" id="inviteCodeError" th:value="${inviteCodeError}" >
+            <input type="hidden" id="inviteCode" th:value="${inviteCode}" >
+
+            <el-form-item   prop="email" label="邮箱" :rules="[ { required: true, message: '请输入邮箱地址', trigger: 'blur' },
+             { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
+             ]" id="username" >
+                <el-input v-model="user.username"  autofocus="true"  :disabled="disabledRegister"></el-input>
+            </el-form-item>
+
+           <el-form-item label="推荐码" >
+                <el-input  id="inviteCode" v-model="inviteCode" readonly ></el-input>
+            </el-form-item>
+
+            <el-form-item>
+                <el-button type="primary" @click="register" :disabled="disabledRegister" >提交</el-button>
+            </el-form-item>
+
+        </el-form>
+
+    </el-dialog>
+
+
+ </div>
+
+</body>
+
+<script type="text/javascript"   th:src="@{/js/vue.js}"></script>
+<script type="text/javascript"   th:src="@{/js/vue-resource.js}"></script>
+<script type="text/javascript"   th:src="@{/js/axios.min.js}"></script>
+
+
+<script type="text/javascript"   th:src="@{/js/index.js}"></script>
+<script type="text/javascript"   th:src="@{/js/register.js}"></script>
+</html>
+

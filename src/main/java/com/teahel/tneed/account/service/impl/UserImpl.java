@@ -39,12 +39,38 @@ public class UserImpl implements IUserService {
         if( exitUser != null){
            throw new RuntimeException("不允许出现重复名称");
         }
+
+        User inviteUser = findByInviteCode(user.getInviteCode());
+
+        if(inviteUser != null){
+            throw new RuntimeException("邀请码不存在");
+        }
+
+        //生产邀请码 10位 数字和字母
+        int leftLimit = 48; // numeral '0'
+        int rightLimit = 122; // letter 'z'
+        int targetStringLength = 10;
+        Random random = new Random();
+
+        String inviteCode = random.ints(leftLimit, rightLimit + 1)
+                .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+                .limit(targetStringLength)
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString();
+
+        //随机密码生产之后发送目标账户邮箱
+        emailUtils.sendEmail(user.getUsername(),"这是你的新密码,如你不是账户主人,请忽略以下密码  \n\n "+inviteCode);
+
+        user.setInviteCode(inviteCode);
+
         /**
          * 对账户密码加密保存
          * 使用默认bcrypt加密方式
+         * 邀请码亦是初始密码
          */
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        user.setPassword(encoder.encode(user.getPassword()));
+        user.setPassword(encoder.encode(inviteCode));
+
         return userRepository.save(user);
     }
 
@@ -121,6 +147,17 @@ public class UserImpl implements IUserService {
             throw new RuntimeException("密码重置错误:"+username);
         }
 
+    }
+
+    /**
+     * 查询是否存在邀请码
+     *
+     * @param inviteCode 邀请码
+     * @return 结果返回
+     */
+    @Override
+    public User findByInviteCode(String inviteCode) {
+        return userRepository.findByInviteCode(inviteCode);
     }
 
 

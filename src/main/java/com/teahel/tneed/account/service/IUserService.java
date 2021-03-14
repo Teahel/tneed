@@ -40,4 +40,12 @@ public interface IUserService {
      */
     void resetPassword(String username);
 
+    /**
+     * 查询是否存在邀请码
+     * @param inviteCode 邀请码
+     * @return 结果返回
+     */
+    User findByInviteCode(String inviteCode);
+
+
 }

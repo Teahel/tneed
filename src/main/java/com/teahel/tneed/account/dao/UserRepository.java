@@ -37,5 +37,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("update User u set u.password = ?1 where u.username = ?2")
     void updateUser(String password,String username);
 
+    /**
+     * 查询是否存在邀请码
+     *
+     * @param inviteCode 邀请码
+     * @return 结果返回
+     */
+    User findByInviteCode(String inviteCode);
 
 }

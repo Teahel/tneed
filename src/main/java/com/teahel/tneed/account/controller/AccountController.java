@@ -40,6 +40,11 @@ public class AccountController {
         return ResultUtils.ok();
     }
 
+    /**
+     * 重置密码
+     * @param email  邮箱
+     * @return 操作结果
+     */
     @PostMapping("/userinfo/resetPassword")
     public ResultUtils resetPassword(String email){
         if(userService.findByUsername(email) == null){
@@ -48,5 +53,13 @@ public class AccountController {
         userService.resetPassword(email);
         return ResultUtils.ok();
     }
+
+    @PostMapping("/")
+    public ResultUtils saveUser(@RequestBody User user){
+        userService.saveUser(user);
+        return ResultUtils.ok();
+    }
+
+
 
 }
