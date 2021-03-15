@@ -36,13 +36,12 @@ public class UserImpl implements IUserService {
     @Override
     public User saveUser(User user) {
         User exitUser = findUser(user);
-        if( exitUser != null){
+        if ( exitUser != null) {
            throw new RuntimeException("不允许出现重复名称");
         }
 
         User inviteUser = findByInviteCode(user.getInviteCode());
-
-        if(inviteUser != null){
+        if (inviteUser != null) {
             throw new RuntimeException("邀请码不存在");
         }
 
@@ -59,7 +58,7 @@ public class UserImpl implements IUserService {
                 .toString();
 
         //随机密码生产之后发送目标账户邮箱
-        emailUtils.sendEmail(user.getUsername(),"这是你的新密码,如你不是账户主人,请忽略以下密码  \n\n "+inviteCode);
+        emailUtils.sendEmail(user.getUsername(),"这是你的Tneed学习码,如你不是账户主人,请忽略以下数字码  \n\n "+inviteCode);
 
         user.setInviteCode(inviteCode);
 

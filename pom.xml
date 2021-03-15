@@ -182,6 +182,14 @@
 		</dependency>
 
 		<!-- 发送邮件 -->
+
+		<!-- 控制登录IP -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.10</version>
+		</dependency>
+
 	</dependencies>
 
 

@@ -2,8 +2,8 @@ new Vue({
     el: '#register',
     data: function() {
         return {
-            user:{
-                username:'',
+            dynamicValidateForm:{
+                email:'',
             },
             visibleDialog:true,
             inviteCodeError:'',
@@ -29,7 +29,7 @@ new Vue({
            }
        },
         register:function () {
-            $.post("/tneed/userinfo/resetPassword",
+            $.post("/tneed/happy",
                 {
                     username:this.user.username,
                     inviteCode:this.inviteCode,

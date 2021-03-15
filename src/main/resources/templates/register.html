@@ -43,7 +43,7 @@
 
     >
 
-        <el-form label-width="100px" class="demo-dynamic" ref="user" :model="user"   label-position="top" >
+        <el-form label-width="100px" :model="dynamicValidateForm" ref="dynamicValidateForm"  class="demo-dynamic"   label-position="top" >
 
             <input type="hidden" id="inviteCodeError" th:value="${inviteCodeError}" >
             <input type="hidden" id="inviteCode" th:value="${inviteCode}" >
@@ -51,7 +51,7 @@
             <el-form-item   prop="email" label="邮箱" :rules="[ { required: true, message: '请输入邮箱地址', trigger: 'blur' },
              { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
              ]" id="username" >
-                <el-input v-model="user.username"  autofocus="true"  :disabled="disabledRegister"></el-input>
+                <el-input v-model="dynamicValidateForm.email"  autofocus="true"  :disabled="disabledRegister"></el-input>
             </el-form-item>
 
            <el-form-item label="推荐码" >
