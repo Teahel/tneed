@@ -58,7 +58,26 @@ public class UserController {
     @GetMapping("/register")
     public String register(Model model,  HttpServletRequest request) {
 
-        if(request.getQueryString() != null){
+        //防止恶意使用工具多次请求，设置redis 控制访问IP  默认允许5次
+        /*
+        String ip = IpUtils.getIpAddress(request);
+        int count = 0 ;
+        String ipCount = redisUtils.get(ip);
+        if (StringUtils.isNotEmpty(ipCount)) {
+            count = Integer.valueOf(ipCount);
+            if (count > Integer.valueOf(propertyConfig.getRegisterCount())) {
+                model.addAttribute("inviteCode","当天请求已经超过"+propertyConfig.getRegisterCount()+"次,无法再请求！");
+                model.addAttribute("inviteCodeError", false);
+                return "register";
+            }
+            redisUtils.set(ip,++count);
+        } else {
+            //如果该ip未超过 次数则保存
+            redisUtils.set(ip,count ++);
+        }
+        */
+
+        if (request.getQueryString() != null) {
             User user = userService.findByInviteCode(request.getQueryString());
             if(user != null){
                 model.addAttribute("inviteCode", request.getQueryString());
@@ -70,7 +89,6 @@ public class UserController {
         model.addAttribute("inviteCodeError", false);
         return "register";
     }
-
 
 
 }

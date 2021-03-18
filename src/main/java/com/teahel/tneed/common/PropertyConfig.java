@@ -13,12 +13,21 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class PropertyConfig {
 
+    /**
+     * 图片地址
+     */
     @Value("${file.path}")
     private String imageAddress;
 
+    /**
+     * 图片保存服务器位置
+     */
     @Value("${image.file}")
     private String iamgeFile;
 
-    @Value("${default.password}")
-    private String defaultPassword;
+    /**
+     *
+     */
+    @Value("${register.count}")
+    private String registerCount;
 }

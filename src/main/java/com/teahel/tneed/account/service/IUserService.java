@@ -1,6 +1,7 @@
 package com.teahel.tneed.account.service;
 
 import com.teahel.tneed.account.entity.User;
+import com.teahel.tneed.common.ResultUtils;
 
 public interface IUserService {
 
@@ -9,7 +10,7 @@ public interface IUserService {
      * @param user 账户信息
      * @return 保存结果
      */
-    public User saveUser(User user);
+    public ResultUtils saveUser(User user);
 
     /**
      * 查询账户信息

@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * @version 1.0
  * @author： L.T.J
@@ -64,10 +62,8 @@ public class AccountController {
      * @return 操作结果
      */
     @PostMapping("/happy")
-    public ResultUtils saveUser(@RequestBody User user,HttpServletRequest request){
-
-        userService.saveUser(user);
-        return ResultUtils.ok();
+    public ResultUtils saveUser(@RequestBody User user) {
+        return userService.saveUser(user);
     }
 
 

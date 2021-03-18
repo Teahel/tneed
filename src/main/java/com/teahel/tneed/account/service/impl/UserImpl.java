@@ -1,9 +1,11 @@
 package com.teahel.tneed.account.service.impl;
 
 import com.teahel.tneed.account.dao.UserRepository;
+import com.teahel.tneed.account.entity.Role;
 import com.teahel.tneed.account.entity.User;
 import com.teahel.tneed.account.service.IUserService;
 import com.teahel.tneed.common.EmailUtils;
+import com.teahel.tneed.common.ResultUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Random;
 
 @Service
@@ -34,43 +38,57 @@ public class UserImpl implements IUserService {
      * @return 保存结果
       */
     @Override
-    public User saveUser(User user) {
-        User exitUser = findUser(user);
-        if ( exitUser != null) {
-           throw new RuntimeException("不允许出现重复名称");
+    public ResultUtils saveUser(User user) {
+        try{
+            User exitUser = findUser(user);
+            if (exitUser != null) {
+                log.error("不允许出现重复名称: ",user.getUsername());
+                return ResultUtils.error("不允许出现重复名称");
+            }
+
+            User inviteUser = findByInviteCode(user.getInviteCode());
+            if (inviteUser == null) {
+                log.error("邀请码不存在: ",user.getInviteCode());
+                return ResultUtils.error("邀请码不存在");
+            }
+
+            //生产邀请码 10位 数字和字母
+            int leftLimit = 48; // numeral '0'
+            int rightLimit = 122; // letter 'z'
+            int targetStringLength = 10;
+            Random random = new Random();
+
+            String password = random.ints(leftLimit, rightLimit + 1)
+                    .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+                    .limit(targetStringLength)
+                    .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                    .toString();
+
+            //随机密码生产之后发送目标账户邮箱
+            emailUtils.sendEmail(user.getUsername(),"这是你的Tneed学习码,如你不是账户主人,请忽略以下数字码  \n\n "+password);
+
+            /**
+             * 对账户密码加密保存
+             * 使用默认bcrypt加密方式
+             * 邀请码亦是初始密码
+             */
+            PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+            user.setPassword(encoder.encode(password));
+
+            String inviteCode = random.ints(leftLimit, rightLimit + 1)
+                    .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+                    .limit(targetStringLength)
+                    .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                    .toString();
+            user.setInviteCode(inviteCode);
+
+            userRepository.save(new User(user.getUsername(),user.getPassword(), Arrays.asList(new Role("ADMIN"),new Role("USER")),
+                    LocalDateTime.now(),LocalDateTime.now(),user.getInviteCode()));
+        }catch (Exception e){
+            log.error("保存账户异常",e);
+            return ResultUtils.error("保存账户异常");
         }
-
-        User inviteUser = findByInviteCode(user.getInviteCode());
-        if (inviteUser != null) {
-            throw new RuntimeException("邀请码不存在");
-        }
-
-        //生产邀请码 10位 数字和字母
-        int leftLimit = 48; // numeral '0'
-        int rightLimit = 122; // letter 'z'
-        int targetStringLength = 10;
-        Random random = new Random();
-
-        String inviteCode = random.ints(leftLimit, rightLimit + 1)
-                .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
-                .limit(targetStringLength)
-                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-                .toString();
-
-        //随机密码生产之后发送目标账户邮箱
-        emailUtils.sendEmail(user.getUsername(),"这是你的Tneed学习码,如你不是账户主人,请忽略以下数字码  \n\n "+inviteCode);
-
-        user.setInviteCode(inviteCode);
-
-        /**
-         * 对账户密码加密保存
-         * 使用默认bcrypt加密方式
-         * 邀请码亦是初始密码
-         */
-        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        user.setPassword(encoder.encode(inviteCode));
-
-        return userRepository.save(user);
+        return ResultUtils.ok();
     }
 
     /**
