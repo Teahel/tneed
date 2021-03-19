@@ -8,7 +8,10 @@ import com.teahel.tneed.common.EmailUtils;
 import com.teahel.tneed.common.ResultUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,6 +19,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 @Service
@@ -176,6 +180,23 @@ public class UserImpl implements IUserService {
     public User findByInviteCode(String inviteCode) {
         return userRepository.findByInviteCode(inviteCode);
     }
+
+    /**
+     * 查询所有的账户
+     * 如果username 字段为空则查询单个账户信息
+     * @return
+     */
+    @Override
+    public List<User> findUsers(User user) {
+        if (StringUtils.isEmpty(user.getUsername())) {
+            return userRepository.findAll(Sort.by(Sort.Direction.DESC,"createTime"));
+        }
+        User u = new User();
+        u.setUsername(user.getUsername());
+        Example<User> example = Example.of(u);
+        return userRepository.findAll(example);
+    }
+
 
 
 }

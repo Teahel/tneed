@@ -30,8 +30,8 @@ public class ServerInfoContorller {
      * @return 查询结果
      */
     @PostMapping("/select")
-    public ResultUtils findServerInfoV2(){
-        List<ServerInfoEntity> list = serverInfoService.findAll();
+    public ResultUtils findServerInfoV2(ServerInfoEntity serverInfoEntity) {
+        List<ServerInfoEntity> list = serverInfoService.findServerInfos(serverInfoEntity);
         return ResultUtils.ok(list);
     }
 

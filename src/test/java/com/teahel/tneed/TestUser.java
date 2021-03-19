@@ -44,8 +44,12 @@ public class TestUser extends TneedApplicationTests{
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         //encoder.encode("SHA-1");
 
-        repository.save(new User("tianjun_plus@163.com", encoder.encode("123456"),
-                Arrays.asList(new Role("ADMIN"),new Role("USER")),LocalDateTime.now(),LocalDateTime.now(), UUID.randomUUID().toString()));
+       /* repository.save(new User("tianjun_plus@163.com", encoder.encode("123456"),
+                Arrays.asList(new Role("ADMIN"),new Role("USER")),LocalDateTime.now(),LocalDateTime.now(), UUID.randomUUID().toString()));*/
+
+        repository.save(new User("litianjun", encoder.encode("123456"),
+                Arrays.asList(new Role("USER")),LocalDateTime.now(),LocalDateTime.now(),"5zf1tV2VKk"));
+
         /*{bcrypt}$2a$10$RleCDGdJBvfQpyPRah8pGOz8d96Qy2LhjhLJ63aJXmKQiMcteNDJS*/
         System.out.println(encoder.encode("123456"));
 

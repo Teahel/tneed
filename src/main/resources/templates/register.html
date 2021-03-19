@@ -17,7 +17,8 @@
 
 </head>
 <body>
-<!--<form action="/tneed/register" method="post">
+<!--
+<form action="/tneed/register" method="post">
     <ul>
         <li class="top_1">
 
@@ -31,17 +32,17 @@
         <li class="ent"><button type="submit" class="btn2"><a>登 &nbsp; &nbsp;录</a></button></li>
     </ul>
      th:value="${inviteCode}
-</form>-->
+</form>
+-->
 
  <div id="register">
 
 
-<el-dialog
-            title="注册"
-            width="30%"
-            :visible.sync="visibleDialog"
-
-    >
+    <el-dialog
+                title="注册"
+                width="30%"
+                :visible.sync="visibleDialog"
+        >
 
         <el-form label-width="100px" :model="dynamicValidateForm" ref="dynamicValidateForm"  class="demo-dynamic"   label-position="top" >
 

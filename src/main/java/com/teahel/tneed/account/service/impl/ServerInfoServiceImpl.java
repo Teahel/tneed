@@ -8,7 +8,10 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -45,8 +48,14 @@ public class ServerInfoServiceImpl implements ServerInfoService {
      * @return 服务信息
      */
     @Override
-    public List<ServerInfoEntity> findAll() {
-        return repository.findAll();
+    public List<ServerInfoEntity> findServerInfos(ServerInfoEntity serverInfoEntity) {
+        if(StringUtils.isEmpty(serverInfoEntity.getUsername())){
+            return repository.findAll(Sort.by(Sort.Direction.DESC,"modifiedTime"));
+        }
+        ServerInfoEntity info = new ServerInfoEntity();
+        info.setUsername(serverInfoEntity.getUsername());
+        Example<ServerInfoEntity> example = Example.of(info);
+        return repository.findAll(example);
     }
 
     /**

@@ -18,7 +18,7 @@ public interface ServerInfoService {
      * 查询服务信息
      * @return 服务信息
      */
-    public List<ServerInfoEntity> findAll();
+    List<ServerInfoEntity> findServerInfos(ServerInfoEntity serverInfoEntity);
 
     /**
      * 新增服务信息
@@ -30,7 +30,7 @@ public interface ServerInfoService {
      * @param remark 备注
      * @return 存储结果
      */
-    public void addServerInfo(MultipartFile image, String serverName, String username, String location, String serverLink, String remark);
+    void addServerInfo(MultipartFile image, String serverName, String username, String location, String serverLink, String remark);
 
     /**
      * 修改服务信息

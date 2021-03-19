@@ -33,7 +33,6 @@ new Vue({
         return {
             tableData: [{
                 username: '',
-                email: '',
                 effectiveTime: ''
             }],
             dialogUserVisible: false,
@@ -79,9 +78,8 @@ new Vue({
             * @type {string}
             */
            var roles = $("#role")[0].innerText
-           if(!roles.includes("ROLE_ADMIN")){
-               addServerButtonVisible = false;
-           }
+           var email = null;
+
            var authentication = $('#authentication');
            if(authentication == undefined || authentication == ""){
                return;
@@ -91,20 +89,23 @@ new Vue({
            this.username = authentication[0].innerText;
            var tableData = this.tableData;
            let self = this;
+           if(!roles.includes("ROLE_ADMIN")){
+               addServerButtonVisible = false;
+               email = this.username;
+           }
 
            /**
             * 查询用户信息
             */
            axios.post('/tneed/user/select', {
-               username:authentication[0].innerText,
+               username:email
            },{headers: {
                    'X-XSRF-TOKEN': token
                }
            }).then(function (response) {
                if(200 == response.status){
                    if(response.data.code == 0){
-                       self.tableData[0].username = response.data.data.username;
-                       self.tableData[0].effectiveTime = response.data.data.effectiveTime;
+                       self.tableData= response.data.data;
                    }
                }
 
@@ -115,8 +116,8 @@ new Vue({
            /**
             * 查询服务信息
             */
-           axios.post('/tneed/server/select', {
-              // username:authentication[0].innerText,
+           axios.post('/tneed/serverInfo/select', {
+               username:email
            },{headers: {
                    'X-XSRF-TOKEN': token
                }

@@ -3,6 +3,8 @@ package com.teahel.tneed.account.service;
 import com.teahel.tneed.account.entity.User;
 import com.teahel.tneed.common.ResultUtils;
 
+import java.util.List;
+
 public interface IUserService {
 
     /**
@@ -48,5 +50,11 @@ public interface IUserService {
      */
     User findByInviteCode(String inviteCode);
 
+    /**
+     * 查询所有的账户
+     * 用户信息
+     * @return 返回数据
+     */
+    List<User> findUsers(User user);
 
 }
