@@ -59,7 +59,6 @@ new Vue({
             fullscreenLoading: false,
             addServerDialogVisible:false, //新增服务信息显示控制dialog
             server:{
-                username:'',
                 serverName:'',
                 location:'',
                 serverLink:'',
@@ -123,14 +122,23 @@ new Vue({
                }
            }).then(function (response) {
                if(200 == response.status){
-                   console.log(response);
+                   if(response.data.code == 0){
+                       self.server= response.data.data;
+                   }
                }
-
            }).catch(function (error) {
                console.log(error);
            });
 
        },
+        tableRowClassName:function ({row, rowIndex}) {
+            if (rowIndex === 1) {
+                return 'warning-row';
+            } else if (rowIndex === 3) {
+                return 'success-row';
+            }
+            return '';
+        },
         /**
          * 修改密码
          * @param data
@@ -216,6 +224,9 @@ new Vue({
                     }
                 }
             });
-        },
+        }/*,
+        handleClick:function (row){
+            console.log(row);
+        }*/
     }
 })

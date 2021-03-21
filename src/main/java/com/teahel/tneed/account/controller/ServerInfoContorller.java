@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServlet;
 import java.util.List;
 
 /**
@@ -30,7 +29,7 @@ public class ServerInfoContorller {
      * @return 查询结果
      */
     @PostMapping("/select")
-    public ResultUtils findServerInfoV2(ServerInfoEntity serverInfoEntity) {
+    public ResultUtils findServerInfo(@RequestBody ServerInfoEntity serverInfoEntity) {
         List<ServerInfoEntity> list = serverInfoService.findServerInfos(serverInfoEntity);
         return ResultUtils.ok(list);
     }
@@ -50,9 +49,6 @@ public class ServerInfoContorller {
         serverInfoService.addServerInfo(image,serverName,username,location,serverLink,remark);
         return ResultUtils.ok();
     }
-
-
-
 
 
 

@@ -32,7 +32,7 @@ public class ServerInfoEntity {
     private String username;
 
     /**
-     * 服务名称
+     * 服务名称(vpn_账户)
      */
     @NotBlank(message = "服务名称不能为空")
     private String serverName;
@@ -76,6 +76,12 @@ public class ServerInfoEntity {
      */
     @Transient
     private MultipartFile image;
+
+    /**
+     * 状态描述
+     */
+    @Transient
+    private String statusMessage;
 
     /*
     主键 id
