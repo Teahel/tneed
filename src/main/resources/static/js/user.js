@@ -64,7 +64,9 @@ new Vue({
                 serverLink:'',
                 remark:'',
                 image:''
-            }
+            },
+            addRechargeDialogVisible:false,
+            disabledAlreadyPay:false
         }
     },
     created:function(){
@@ -188,6 +190,9 @@ new Vue({
         addServerInfoDialog:function (){
             this.addServerDialogVisible = true;
         },
+        addRechargeDialog:function(){
+            this.addRechargeDialogVisible = true;
+        },
         resetServerInfoForm:function () {
             this.server='';
         },
@@ -224,9 +229,43 @@ new Vue({
                     }
                 }
             });
-        }/*,
-        handleClick:function (row){
-            console.log(row);
-        }*/
+        },
+        alreadyPay:function () {
+            this.disabledAlreadyPay = true;
+            let self = this;
+            axios.post('/tneed/user/update', {
+                username:this.username,
+                password:this.ruleForm.checkPass,
+                oldPassword:this.ruleForm.oldPassword
+            },{headers: {
+                    'X-XSRF-TOKEN': this.token
+                }
+            }).then(function (response) {
+                if(200 == response.status){
+                    axios.post('/tneed/logout', {headers: {
+                            'X-XSRF-TOKEN': this.token
+                        }
+                    }).then(function (response) {
+                        if(200 == response.status){
+                            self.fullscreenLoading = true;
+                            setTimeout(() => {
+                                self.fullscreenLoading = false;
+                            self.$message({
+                                duration:3000,
+                                message: '恭喜你，这是一条成功消息',
+                                type: 'success'
+                            });
+                            window.location = "/tneed/login"
+                        }, 3000);
+                        }
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                }
+
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
     }
 })

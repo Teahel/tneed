@@ -40,6 +40,11 @@
                         </el-col>
 
                         <el-col :span="1" :offset="1">
+                            <el-button  type="text" @click="addRechargeDialog" >充值</el-button>
+                        </el-col>
+
+
+                        <el-col :span="1" :offset="1">
                             <form action="#" th:action="@{/logout}" method="post">
                                 <el-button  type="text" native-type="submit" >安全退出</el-button>
                             </form>
@@ -124,6 +129,49 @@
                     </el-dialog>
 
 
+
+                    <!--充值界面-->
+                    <el-dialog
+                            show-close:false
+                            title="费用donate界面(支付后点击已支付)"
+                            :visible.sync="addRechargeDialogVisible"
+                            width="40%"
+                            height="30%"
+                    >
+                       <!--
+                       <el-row :gutter="20">
+                            <el-col :span="8" :offset="8">
+                                <el-image
+                                        style="width: 200px; height: 200px"
+                                        src="http://182.254.140.133:9088/donate.png"
+                                        >
+                                </el-image>
+                          </el-col>
+                        </el-row>
+
+                        <el-row :gutter="40">
+
+                        </el-row>
+
+                        <el-row :gutter="20">
+                            <el-col :span="8" :offset="9">
+                                <el-button type="warning" @click="alreadyPay" :disabled="disabledAlreadyPay">已支付</el-button>
+                           </el-col>
+                        </el-row>
+                        -->
+
+                        <template>
+                            <el-carousel :interval="4000" type="card" height="200px">
+                                <el-carousel-item v-for="item in imageItems" :key="item">
+                                    <h3 class="medium">{{ item }}</h3>
+                                </el-carousel-item>
+                            </el-carousel>
+                        </template>
+
+                    </el-dialog>
+
+
+
                     <el-row :gutter="0" >
                         <el-col :span="16" :offset="4">
                         <div class="grid-content bg-purple">
@@ -175,16 +223,16 @@
                                 <el-table-column
                                         prop="serverName"
                                         label="服务名称"
-                                        width="180">
+                                        >
                                 </el-table-column>
                                 <el-table-column
                                         prop="location"
                                         label="地区"
-                                        width="180">
+                                    >
                                 </el-table-column>
                                 <el-table-column
                                         label="二维码"
-                                        width="180">
+                                       >
                                     <template width="90" slot-scope="scope">
 
                                         <el-image
@@ -197,17 +245,25 @@
                                 <el-table-column
                                         prop="statusMessage"
                                         label="状态"
-                                        width="180">
+                                        >
                                 </el-table-column>
 
-                               <!-- <el-table-column
+                                <el-table-column
+                                        prop="remark"
+                                        label="备注"
+                                       >
+                                </el-table-column>
+
+                               <!--
+                               <el-table-column
                                         fixed="right"
                                         label="操作"
                                         width="100">
                                     <template slot-scope="scope">
                                         <el-button type="text" size="small">编辑</el-button>
                                     </template>
-                                </el-table-column>-->
+                                </el-table-column>
+                                -->
 
                             </el-table>
 
