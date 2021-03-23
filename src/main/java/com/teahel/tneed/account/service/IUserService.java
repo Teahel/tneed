@@ -57,4 +57,10 @@ public interface IUserService {
      */
     List<User> findUsers(User user);
 
+    /**
+     * 支付成功后发送邮件
+     * @param username 用户名
+     * @return 执行结果
+     */
+    void alreadyPay(String username);
 }

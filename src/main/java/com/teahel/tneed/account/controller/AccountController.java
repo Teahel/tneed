@@ -67,5 +67,16 @@ public class AccountController {
         return userService.saveUser(user);
     }
 
+    /**
+     * 支付成功后发送邮件
+     * @param username 用户名
+     * @return 执行结果
+     */
+    @PostMapping("/pay")
+    public ResultUtils alreadyPay(String username) {
+       userService.alreadyPay(username);
+       return ResultUtils.ok();
+    }
+
 
 }

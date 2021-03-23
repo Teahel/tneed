@@ -197,6 +197,23 @@ public class UserImpl implements IUserService {
         return userRepository.findAll(example);
     }
 
+    /**
+     * 支付成功后发送邮件
+     *
+     * @param username 用户名
+     * @return 执行结果
+     */
+    @Override
+    public void alreadyPay(String username) {
+        try{
+            //随机密码生产之后发送目标账户邮箱
+            emailUtils.sendEmail(username,"时间 :"+LocalDateTime.now()+"\n\n"+"账户："+username);
+        }catch (Exception e){
+            log.error("发送已支付信息异常 账户："+username,e);
+            throw  new RuntimeException("发送已支付信息异常 账户："+username,e);
+        }
+
+    }
 
 
 }

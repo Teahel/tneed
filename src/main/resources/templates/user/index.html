@@ -161,13 +161,17 @@
                         -->
 
                         <template>
-                            <el-carousel :interval="4000" type="card" height="200px">
+                            <el-carousel :interval="5000" type="card" height="500px">
                                 <el-carousel-item v-for="item in imageItems" :key="item">
-                                    <h3 class="medium">{{ item }}</h3>
+                                    <el-image
+                                            style="width: 280px; height: 450px"  :src=item
+                                    >
+                                    </el-image>
+                                 <!--   <h3 class="medium">{{ item }}</h3>-->
                                 </el-carousel-item>
                             </el-carousel>
                         </template>
-
+                        <el-button type="warning" @click="alreadyPay" :disabled="disabledAlreadyPay">已支付</el-button>
                     </el-dialog>
 
 

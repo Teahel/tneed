@@ -66,7 +66,11 @@ new Vue({
                 image:''
             },
             addRechargeDialogVisible:false,
-            disabledAlreadyPay:false
+            disabledAlreadyPay:false,
+            imageItems:[
+              "http://182.254.140.133:9088/pay_one.jpg",
+                "http://182.254.140.133:9088/pay_three.jpg"
+            ]
         }
     },
     created:function(){
@@ -231,41 +235,20 @@ new Vue({
             });
         },
         alreadyPay:function () {
-            this.disabledAlreadyPay = true;
+          // this.disabledAlreadyPay = true;
             let self = this;
-            axios.post('/tneed/user/update', {
-                username:this.username,
-                password:this.ruleForm.checkPass,
-                oldPassword:this.ruleForm.oldPassword
-            },{headers: {
-                    'X-XSRF-TOKEN': this.token
-                }
-            }).then(function (response) {
-                if(200 == response.status){
-                    axios.post('/tneed/logout', {headers: {
-                            'X-XSRF-TOKEN': this.token
-                        }
-                    }).then(function (response) {
-                        if(200 == response.status){
-                            self.fullscreenLoading = true;
-                            setTimeout(() => {
-                                self.fullscreenLoading = false;
-                            self.$message({
-                                duration:3000,
-                                message: '恭喜你，这是一条成功消息',
-                                type: 'success'
-                            });
-                            window.location = "/tneed/login"
-                        }, 3000);
-                        }
-                    }).catch(function (error) {
-                        console.log(error);
-                    });
-                }
-
-            }).catch(function (error) {
-                console.log(error);
-            });
+            $.post("/tneed/pay",
+                {
+                    username:this.username,
+                    _csrf:this.token
+                },
+                function(data,message){
+                    if(data.code==0){
+                       console.log(data)
+                    } else {
+                       console.log(data)
+                    }
+                });
         }
     }
 })
