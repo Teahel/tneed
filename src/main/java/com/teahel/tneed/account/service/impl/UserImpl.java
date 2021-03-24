@@ -47,7 +47,7 @@ public class UserImpl implements IUserService {
             User exitUser = findUser(user);
             if (exitUser != null) {
                 log.error("不允许出现重复名称: ",user.getUsername());
-                return ResultUtils.error("不允许出现重复名称");
+                return ResultUtils.error("不允许出现重复账户");
             }
 
             User inviteUser = findByInviteCode(user.getInviteCode());
@@ -86,7 +86,7 @@ public class UserImpl implements IUserService {
                     .toString();
             user.setInviteCode(inviteCode);
 
-            userRepository.save(new User(user.getUsername(),user.getPassword(), Arrays.asList(new Role("ADMIN"),new Role("USER")),
+            userRepository.save(new User(user.getUsername(),user.getPassword(), Arrays.asList(new Role("USER")),
                     LocalDateTime.now(),LocalDateTime.now(),user.getInviteCode()));
         }catch (Exception e){
             log.error("保存账户异常",e);

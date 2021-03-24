@@ -3,6 +3,10 @@ package com.teahel.tneed.account.controller;
 
 import com.teahel.tneed.account.entity.User;
 import com.teahel.tneed.account.service.IUserService;
+import com.teahel.tneed.common.IpUtils;
+import com.teahel.tneed.common.PropertyConfig;
+import com.teahel.tneed.common.RedisUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +19,13 @@ import javax.servlet.http.HttpServletRequest;
 public class UserController {
 
     @Autowired
-    IUserService userService;
+    private IUserService userService;
+
+    @Autowired
+    private RedisUtils redisUtils;
+
+    @Autowired
+    private PropertyConfig propertyConfig;
 
     @RequestMapping("/")
     public String root() {
@@ -59,7 +69,7 @@ public class UserController {
     public String register(Model model,  HttpServletRequest request) {
 
         //防止恶意使用工具多次请求，设置redis 控制访问IP  默认允许5次
-        /*
+
         String ip = IpUtils.getIpAddress(request);
         int count = 0 ;
         String ipCount = redisUtils.get(ip);
@@ -75,7 +85,7 @@ public class UserController {
             //如果该ip未超过 次数则保存
             redisUtils.set(ip,count ++);
         }
-        */
+
 
         if (request.getQueryString() != null) {
             User user = userService.findByInviteCode(request.getQueryString());
