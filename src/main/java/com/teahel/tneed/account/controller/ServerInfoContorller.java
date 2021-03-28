@@ -38,7 +38,7 @@ public class ServerInfoContorller {
      * 新增服务信息
      * @param image 图片
      * @param serverName 服务名称
-     * @param username 账户名
+     * @param username 创建人账户名
      * @param location 地址
      * @param serverLink 服务链接
      * @param remark 备注

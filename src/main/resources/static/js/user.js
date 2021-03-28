@@ -70,7 +70,8 @@ new Vue({
             imageItems:[
               "http://182.254.140.133:9088/pay_one.jpg",
                 "http://182.254.140.133:9088/pay_three.jpg"
-            ]
+            ],
+
         }
     },
     created:function(){
@@ -97,6 +98,7 @@ new Vue({
            if(!roles.includes("ROLE_ADMIN")){
                addServerButtonVisible = false;
                email = this.username;
+               $("#serverButton").hide()
            }
 
            /**
@@ -122,7 +124,7 @@ new Vue({
             * 查询服务信息
             */
            axios.post('/tneed/serverInfo/select', {
-               username:email
+               serverName:email
            },{headers: {
                    'X-XSRF-TOKEN': token
                }

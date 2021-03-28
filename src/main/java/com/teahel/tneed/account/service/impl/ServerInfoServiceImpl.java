@@ -49,11 +49,11 @@ public class ServerInfoServiceImpl implements ServerInfoService {
      */
     @Override
     public List<ServerInfoEntity> findServerInfos(ServerInfoEntity serverInfoEntity) {
-        if(StringUtils.isEmpty(serverInfoEntity.getUsername())){
+        if(StringUtils.isEmpty(serverInfoEntity.getServerName())){
             return repository.findAll(Sort.by(Sort.Direction.DESC,"modifiedTime"));
         }
         ServerInfoEntity info = new ServerInfoEntity();
-        info.setUsername(serverInfoEntity.getUsername());
+        info.setServerName(serverInfoEntity.getServerName());
         Example<ServerInfoEntity> example = Example.of(info);
         return repository.findAll(example);
     }

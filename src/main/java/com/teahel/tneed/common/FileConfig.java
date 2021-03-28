@@ -2,7 +2,6 @@ package com.teahel.tneed.common;
 
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.MultipartConfigElement;
 
@@ -13,7 +12,7 @@ import javax.servlet.MultipartConfigElement;
  * 打war包要去掉
  */
 
-@Configuration
+/*@Configuration*/
 public class FileConfig {
 
     @Bean

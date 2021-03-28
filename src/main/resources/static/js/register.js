@@ -28,6 +28,7 @@ new Vue({
            }
        },
         register:function (formName) {
+            self.disabledRegister = true;
             this.$refs[formName].validate((valid) => {
                 if (valid) {
                     self = this
@@ -39,7 +40,6 @@ new Vue({
                         }
                     }).then(function (response) {
                         if(response.data.code==0){
-                            self.disabledRegister = true;
                             self.$message({
                                 duration:6000,
                                 message: '注册成功，Tneed 学习码已经发送到邮箱，即将跳转登录界面!',

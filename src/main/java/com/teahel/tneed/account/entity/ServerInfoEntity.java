@@ -32,7 +32,7 @@ public class ServerInfoEntity {
     private String username;
 
     /**
-     * 服务名称(vpn_账户)
+     * 服务名称
      */
     @NotBlank(message = "服务名称不能为空")
     private String serverName;
