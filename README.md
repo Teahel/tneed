@@ -3,7 +3,11 @@
 
 使用了springboot vue jquery elementUI框架
 
-Tomcat nginx redis
+使用Tomcat部署
+nginx 代理查看图片
+redis 控制ip访问次数
+
+
 
 
 
