@@ -31,22 +31,22 @@
                             <el-link :underline="false" href="/tneed/user/index" >主页</el-link>
                         </el-col>
                         <el-col :span="1">
-                            <el-button type="text" @click="dialogUserVisible = true">修改账户信息</el-button>
+                            <el-button type="warning" @click="dialogUserVisible = true">修改账户信息</el-button>
                        <!--     <el-link :underline="false"  href="/index"  >修改密码</el-link>-->
                         </el-col>
 
                         <el-col :span="1" :offset="1" id="serverButton">
-                            <el-button  type="text" @click="addServerInfoDialog" >添加服务账户</el-button>
+                            <el-button  type="warning" @click="addServerInfoDialog" >添加服务账户</el-button>
                         </el-col>
 
                         <el-col :span="1" :offset="1">
-                            <el-button  type="text" @click="addRechargeDialog" >充值</el-button>
+                            <el-button  type="warning" @click="addRechargeDialog" >充值</el-button>
                         </el-col>
 
 
                         <el-col :span="1" :offset="1">
                             <form action="#" th:action="@{/logout}" method="post">
-                                <el-button  type="text" native-type="submit" >安全退出</el-button>
+                                <el-button  type="warning" native-type="submit" >安全退出</el-button>
                             </form>
                         </el-col>
 
@@ -183,8 +183,9 @@
                             <p>2、如果有问题请发送邮件到li.teahel@gmail.com;我看到之后会尽快回复。</p>
                             <p>3、为了避免浪费时间，请把问题描述清楚。</p>
                             <p>4、具体操作,根据链接操作 http://teahel.club/如何使用工具/</p>
-                            <p>5、声明：本网站仅为学习提供，收取费用是为了支持服务器费用。</p>
+                            <p>5、文件下载http://www.teahel.plus:8088/files/</p>
                             <p>6、声明：本网站仅为学习提供，收取费用是为了支持服务器费用。</p>
+                            <p>7、声明：本网站仅为学习提供，收取费用是为了支持服务器费用。</p>
 
                         </div>
 
